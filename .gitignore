@@ -1,0 +1,17 @@
+*.pyc
+__pycache__
+myvenv
+db.sqlite3
+db.postgresql
+/static
+.DS_Store
+*.swp
+local_settings.py
+settings.py
+*.json
+.jshintrc
+.jsdtscope
+org.eclipse.*
+com.eclipsesource.*
+.project
+.pydevproject

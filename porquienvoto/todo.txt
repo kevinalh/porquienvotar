@@ -1,0 +1,6 @@
+- El algoritmo es erroneo:
+	Los grados de acuerdo son inconsistentes. Creo que sería mejor que las únicas opciones sean agree/disagree,
+	y los grados de fuerza para cada uno se den a partir de cuántas veces se presiona el botón.
+
+- Complejidad en el coding:
+	Para reducir complejidad, que los candidatos sólo puedan tener opciones agree/disagree/neutral.

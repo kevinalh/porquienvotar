@@ -1,0 +1,57 @@
+{% extends 'homepage/base.html' %}
+
+{% load staticfiles %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{% static "homepage/css/full.css" %}">	
+{% endblock estilos %}
+
+{% block htmlstuff %}
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7 full" lang="es"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8 full" lang="es"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9 full" lang="es"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js full" lang="es"> <!--<![endif]-->
+{% endblock htmlstuff %}  
+ 
+{% block container_estandar %}
+
+		<div class="container">
+			<noscript>
+				<div id="barra_error" class="alert alert-danger">
+					<span id="barra_error_texto">
+						<p>Para utilizar las funcionalidades completas de este sitio es necesario tener JavaScript habilitado.
+						AquÃ­ estÃ¡n las <a href="http://www.enable-javascript.com/es/" target="_blank">
+						instrucciones para habilitar JavaScript en tu navegador web</a>.</p>
+					</span>
+				</div>
+			</noscript>
+			{% block content %}
+
+                <article class="landing_inicio">
+                    <header>
+                        <h1 class="PQVheader blanco"><strong>¿Por quién votar?</strong></h1>
+                        <h3 class="blanco">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</h3>
+                    </header>
+                    <hr>
+                    <a href="{% url 'quiz:quizindex' %}"><button class="btn btn-success btn-lg">Empezar el cuestionario</button></a>
+                </article>
+
+                <aside>
+                    <h3></h3>
+                    <p></p>
+                </aside>
+
+			{% endblock content %}
+		</div>
+		
+	<div class="container">
+	    <footer class="footer">
+	    	<div class="container">
+	    		<p class="text-muted">
+	    			<i class="fa fa-copyright" aria-hidden="true"></i>&nbsp;2016 -
+	    		</p>
+	    	</div>
+	    </footer>
+    </div> <!-- /container -->
+
+{% endblock container_estandar %} 

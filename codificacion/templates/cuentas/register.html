@@ -1,0 +1,47 @@
+{% extends 'homepage/base.html' %}
+{% load staticfiles %}
+{% load addcss %}
+
+{% block navegacion %}
+<li><a href="{% url 'indice' %}">Inicio</a></li>
+<li><a href="{% url 'quiz:quizindex' %}">Preguntas</a></li>
+<li><a href="{% url 'codificacion:codeindex' %}">Codificar</a></li>
+{% endblock navegacion %}
+
+{% block scripts %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="{% static "homepage/js/bootstrap.min.js" %}"></script>
+<script src="{% static "codificacion/js/codeindex.js" %}"></script>
+{% endblock scripts %}
+
+{% block content %}
+<form method="POST" action="">
+	{% csrf_token %}
+	<h2 class="form-signin-heading">Registro</h2>
+	<div id="usernameID" class="form-group">
+		{{ form.username.label_tag }}
+		{{ form.username.errors }}
+		{{ form.username|add_attributes:"form-control"}}
+		<span id="helpBlock_username" class="help-block helptext">
+			{{ form.username.help_text }}
+		</span>
+    </div>
+    <div id="password1ID" class="form-group">
+	    {{ form.password1.label_tag }}
+	    {{ form.password1.errors }}
+	    {{ form.password1|add_attributes:"form-control" }}
+	    <span id="helpBlock_password1" class="help-block helptext">
+			{{ form.password1.help_text }}
+		</span>
+    </div>
+    <div id="password2ID" class="form-group">
+	    {{ form.password2.label_tag }}
+	    {{ form.password2.errors }}
+	    {{ form.password2|add_attributes:"form-control" }}
+	    <span id="helpBlock_password2" class="help-block helptext">
+			{{ form.password2.help_text }}
+		</span>
+    </div>
+	<button type="submit" class="btn btn-info">Registrarse</button>
+</form>
+{% endblock content %}

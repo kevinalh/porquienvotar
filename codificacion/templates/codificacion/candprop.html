@@ -1,0 +1,34 @@
+{% extends 'codificacion/codebase.html' %}
+
+{% load staticfiles %}
+{% load addcss %}
+
+{% block scripts %}
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="{% static "homepage/js/bootstrap.min.js" %}"></script>
+	<script src="{% static "codificacion/js/codeindex.js" %}"></script>
+	
+{% endblock scripts %}
+
+{% block content %}
+
+	<header>
+		<h3>Posición de {{ candidato.nombre_candidato }} {{ candidato.apellido_candidato }} con respecto a: </h3>
+		<h2> {{ propuesta.titulo_propuesta }} </h2>
+	</header>
+
+	<form method="POST" class="post-form" id="formulario_usuarios">
+		{% csrf_token %}
+		{% for form_section in form %}
+			<div class="form-group">
+				{{ form_section.label_tag }}
+				{{ form_section|add_attributes:"form-control" }}
+				{{ form_section.errors }}
+			</div>
+		{% endfor %}
+        <button type="submit" class="save btn btn-default">Enviar</button>
+	</form>
+	
+
+{% endblock content %}

@@ -1,0 +1,34 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+@media (min-width: 981px) { body { padding-top: 60px; } }
+
+.blanco {
+	color: white;
+}
+
+.PQVheader {
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.landing_inicio {
+	text-align: center;
+}
+
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  line-height: 40px; /* adjust line height to align vertically*/
+  padding:0;
+  border-radius: 50%;
+}
+
+.top1 { margin-top:1%; }
+
+
+
+
+

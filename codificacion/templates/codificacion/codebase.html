@@ -1,0 +1,20 @@
+{% extends 'homepage/base.html' %}
+
+{% load staticfiles %}
+
+{% block scripts %}
+<script src="{% static "homepage/js/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+{% endblock scripts %}
+
+{% block navegacion %}
+	<li><a href="{% url 'indice' %}">Inicio</a></li>
+	<li><a href="{% url 'quiz:quizindex' %}">Preguntas</a></li>
+	<li class="active"><a href="{% url 'codificacion:codeindex' %}">Codificar</a></li>
+{% endblock navegacion %}
+
+{% block content %}
+
+	
+
+{% endblock content %}

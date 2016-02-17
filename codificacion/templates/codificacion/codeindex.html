@@ -1,0 +1,90 @@
+{% extends 'codificacion/codebase.html' %}
+
+{% load staticfiles %}
+{% load addcss %}
+
+{% block scripts %}
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="{% static "homepage/js/bootstrap.min.js" %}"></script>
+	<script src="{% static "codificacion/js/codeindex.js" %}"></script>
+	<script src="{% static "homepage/js/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
+	<script src="{% static "homepage/js/bootstrap.min.js" %}"></script>
+	
+{% endblock scripts %}
+
+{% block content %}
+
+	<header>
+	
+		<div>
+			<div class="intro-lead-in text-center"><h1>Bienvenid{{ arroba }} de vuelta, {{ user.username }}</h1></div>
+	
+	{% if token_falta %}
+	
+	    	<div class="jumbotron">
+	            <form method="POST" class="form-horizontal text-center">
+	            	{% csrf_token %}
+	            	{{ formulario.non_field_errors }}
+	            	<h3>Ingresa tu token ahora <a tabindex="0" class="btn btn-xs btn-link"
+	            		role="button" data-toggle="popover" data-trigger="focus" title="Token"
+	            		data-content="{{ tokendesc|safe }}">
+	            			[?]
+	            	</a></h3>
+	            	{{ formulario.token_input.errors }}
+		            <div class="input-group">
+						{{ formulario.token_input|add_attributes:"form-control text-center" }}
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-warning">Enviar token</button>
+						</span>
+					</div>
+				</form>
+	        </div>
+	        
+	{% endif %}
+	 
+		</div>
+
+    </header>
+		
+	<article>
+	
+	
+	<div class="row">
+		<div class="col-md-2">
+			<ul class="nav nav-tabs nav-stacked" role="tablist">
+			 	 <li role="presentation"><h4>Categorías</h4></li>
+				{% for categoria, valores in propuestas.items %} 
+					  <li role="presentation">
+					  	<a href="#{{ categoria.id|safe }}" aria-controls="{{ categoria.id|safe }}" role="tab" data-toggle="tab">
+					  		{{ categoria|safe }}
+					  	</a>
+					  </li>
+				{% endfor %}
+			</ul>
+		</div>
+		
+		<div class="col-md-10 tab-content">
+			{% for categoria, valores in propuestas.items %}
+				<div role="tabpanel" class="tab-pane" id="{{ categoria.id|safe }}">
+					<ul class="list-group">
+						<li class="list-group-item"><h4><strong>{{ categoria|safe }}</strong></h4></li>
+						{% for propuesta in valores %}
+							<li class="list-group-item">
+								<h4>
+									{{ propuesta.titulo_propuesta|safe }}
+									<a class="btn btn-info pull-right" href="{% url 'codificacion:propdetalle' propuesta.id %}" role="button">Editar</a>
+								</h4>
+								<p>{{ propuesta.descripcion_propuesta|safe }}</p>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endfor %}
+		</div>
+	
+	</div>
+	
+	</article>
+
+{% endblock content %}

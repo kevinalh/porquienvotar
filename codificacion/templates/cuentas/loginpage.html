@@ -1,0 +1,85 @@
+{% extends 'homepage/base.html' %}
+{% load addcss %}
+
+{% block navegacion %}
+	<li><a href="{% url 'indice' %}">Inicio</a></li>
+    <li><a href="{% url 'quiz:quizindex' %}">Preguntas</a></li>
+    <li class="active"><a href="{% url 'codificacion:codeindex' %}">Codificar</a></li>
+{% endblock navegacion %}
+
+{% block scripts %}
+<script>
+	$(document).ready(function(){
+		$("#loginID").addClass("active");
+	});
+</script>
+{% endblock scripts %}
+
+{% block content %}
+
+	{% if form.errors %}
+		<div id="barra_advertencia" class="alert alert-warning">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<span> {{ form.non_field_errors }} </span>
+		</div>
+	{% endif %}
+	
+	{% if next %}
+	    {% if user.is_authenticated %}
+	    	<div id="barra_error" class="alert alert-danger">
+				<span> Su cuenta no tiene acceso a lo solicitado. </span>
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			</div>
+	    {% else %}
+	    	<div id="barra_advertencia" class="alert alert-warning">
+				<span> Necesitas ingresar para poder ver esto </span>
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			</div>
+	    {% endif %}
+	{% endif %}
+	
+	<div class="col-md-8">
+		<form method="post" action="{% url 'login' %}" class="form-signin">
+			{% csrf_token %}
+	        <h2 class="form-signin-heading">Ingrese sus datos</h2>
+	        <div id="usernameID" class="form-group">
+				{{ form.username.label_tag }}
+				{{ form.username.errors }}
+				{{ form.username|add_attributes:"form-control"}}
+				<span id="helpBlock_username" class="help-block helptext">
+					{{ form.username.help_text }}
+				</span>
+		    </div>
+		    <div id="usernameID" class="form-group">
+				{{ form.password.label_tag }}
+				{{ form.password.errors }}
+	        	{{ form.password|add_attributes:"form-control" }}
+				<span id="helpBlock_password" class="help-block helptext">
+					{{ form.username.help_text }}
+				</span>
+		    </div>
+	        <div class="checkbox">
+	        	<label>
+	            	<input type="checkbox" value="remember-me"> Recordarme
+	          	</label>
+	        </div>
+	        <button class="btn btn-sm btn-primary btn-block" type="submit" value="login">Ingresar</button>
+	        <input type="hidden" name="next" value="{{ next }}" />
+		</form>
+	</div>
+	<div class="col-md-4">
+		<div class="jumbotron">
+			<h4>¿No tienes una cuenta?</h4>
+			<br />
+			<p><a class="btn btn-warning btn-sm" href="{% url 'registro' %}" role="button">Registrarse</a></p>
+		</div>		
+	</div>
+
+{% comment %}
+	
+	{# Assumes you setup the password_reset view in your URLconf #}
+	<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+{% endcomment %}
+
+{% endblock %}
