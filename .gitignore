@@ -16,3 +16,4 @@ com.eclipsesource.*
 .project
 .pydevproject
 porquienvoto/settings/local.py
+scripts_auxiliares/*
