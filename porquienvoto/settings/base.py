@@ -67,8 +67,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = '/var/www/kevinalh_pythonanywhere_com_wsgi.py'
-
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 

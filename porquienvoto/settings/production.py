@@ -17,6 +17,7 @@ SECRET_KEY = get_env_variable("MY_KEY")
 
 DEBUG = False
 
+WSGI_APPLICATION = '/var/www/kevinalh_pythonanywhere_com_wsgi.py'
 ALLOWED_HOSTS = ['kevinalh.pythonanywhere.com']
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
