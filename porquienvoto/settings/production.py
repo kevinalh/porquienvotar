@@ -18,3 +18,16 @@ SECRET_KEY = get_env_variable("MY_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = ['kevinalh.pythonanywhere.com']
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = '/static/'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'kevinalh$pqvoto',
+        'USER': 'kevinalh',
+        'PASSWORD': 'thenemesis12*',
+        'HOST': 'kevinalh.mysql.pythonanywhere-services.com',
+    }
+}
