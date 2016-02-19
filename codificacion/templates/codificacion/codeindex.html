@@ -28,7 +28,7 @@
 	            	{{ formulario.non_field_errors }}
 	            	<h3>Ingresa tu token ahora <a tabindex="0" class="btn btn-xs btn-link"
 	            		role="button" data-toggle="popover" data-trigger="focus" title="Token"
-	            		data-content="{{ tokendesc|safe }}">
+	            		data-content="{{ tokendesc }}">
 	            			[?]
 	            	</a></h3>
 	            	{{ formulario.token_input.errors }}
@@ -56,8 +56,8 @@
 			 	 <li role="presentation"><h4>Categorías</h4></li>
 				{% for categoria, valores in propuestas.items %} 
 					  <li role="presentation">
-					  	<a href="#{{ categoria.id|safe }}" aria-controls="{{ categoria.id|safe }}" role="tab" data-toggle="tab">
-					  		{{ categoria|safe }}
+					  	<a href="#{{ categoria.id }}" aria-controls="{{ categoria.id }}" role="tab" data-toggle="tab">
+					  		{{ categoria }}
 					  	</a>
 					  </li>
 				{% endfor %}
@@ -66,16 +66,16 @@
 		
 		<div class="col-md-10 tab-content">
 			{% for categoria, valores in propuestas.items %}
-				<div role="tabpanel" class="tab-pane" id="{{ categoria.id|safe }}">
+				<div role="tabpanel" class="tab-pane" id="{{ categoria.id }}">
 					<ul class="list-group">
-						<li class="list-group-item"><h4><strong>{{ categoria|safe }}</strong></h4></li>
+						<li class="list-group-item"><h4><strong>{{ categoria }}</strong></h4></li>
 						{% for propuesta in valores %}
 							<li class="list-group-item">
 								<h4>
-									{{ propuesta.titulo_propuesta|safe }}
+									{{ propuesta.titulo_propuesta }}
 									<a class="btn btn-info pull-right" href="{% url 'codificacion:propdetalle' propuesta.id %}" role="button">Editar</a>
 								</h4>
-								<p>{{ propuesta.descripcion_propuesta|safe }}</p>
+								<p>{{ propuesta.descripcion_propuesta }}</p>
 							</li>
 						{% endfor %}
 					</ul>

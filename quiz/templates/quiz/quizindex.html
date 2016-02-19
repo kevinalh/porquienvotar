@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script src="https://www.google.com/jsapi"></script>	
 	<script>
-		var relpropuestas = $.parseJSON('{{ relpropuestas|safe|escapejs }}');
+		var relpropuestas = $.parseJSON('{{ relpropuestas|escapejs }}');
 		var candidatos = {};
 		{% for candidato in lista_candidatos %}
 			candidatos[{{ candidato.id|escapejs }}] = {'partido': '{{ candidato.partido_candidato.nombre_partido|escapejs }}',
@@ -80,10 +80,10 @@
 					</div>
 					<script>
 						$(document).ready(function() {
-							$("input[name='op_{{ propuesta.id|safe|escapejs }}']:radio").change(function () {
-								respuestas['{{ propuesta.id|escapejs|safe }}'] = parseInt($(this).val(),10);
+							$("input[name='op_{{ propuesta.id|escapejs }}']:radio").change(function () {
+								respuestas['{{ propuesta.id|escapejs }}'] = parseInt($(this).val(),10);
 							});
-							$('#slider_{{ propuesta.id|safe|escapejs }}').slider({
+							$('#slider_{{ propuesta.id|escapejs }}').slider({
 								formatter: function(value) {
 									return 'Importancia asignada: ' + value;
 								}
@@ -141,13 +141,13 @@
 						<table class="table">
 						{% for categoria, propuesta_categorizada in propuestas.items %}
 						<tr>
-							<th id="tablasCat_{{ categoria.id|safe }}"><strong>{{ categoria|safe }}</strong></th>
+							<th id="tablasCat_{{ categoria.id }}"><strong>{{ categoria }}</strong></th>
 							<th></th><th></th>
 						</tr>
 						{% for propuesta in propuesta_categorizada %}
-			 			<tr class="tablasP_{{ propuesta.id|safe }}">
+			 			<tr class="tablasP_{{ propuesta.id }}">
 							<td>
-								{{ propuesta.titulo_propuesta|safe }}
+								{{ propuesta.titulo_propuesta }}
 							</td>
 							<td class="posCandidato">
 								<span>-</span>
