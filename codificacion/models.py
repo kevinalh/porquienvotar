@@ -1,5 +1,3 @@
-# -*- encoding: utf-8 -*-
-
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -80,12 +78,12 @@ class Opinion_RelPropuesta(models.Model):
     tiempo_subida = models.DateTimeField(auto_now_add=True, blank=True)
 
     # Necesarios
-    justificacion = models.TextField("justificación", max_length=2000, blank=True)
+    justificacion = models.TextField("justificacion", max_length=2000, blank=True)
     fuente = models.CharField(default='Plan_de_Gobierno', max_length=25, choices=FUENTES_POSIBLES)
-    valor_propuesta = models.SmallIntegerField("posición", default=0, choices=VOTOS_PERMITIDOS)
+    valor_propuesta = models.SmallIntegerField("posicion", default=0, choices=VOTOS_PERMITIDOS)
 
     # Opcionales segun fuente
-    paginadelplan = models.PositiveSmallIntegerField("página del Plan", default=0, blank=True)
+    paginadelplan = models.PositiveSmallIntegerField("pagina del Plan", default=0, blank=True)
     link_fuente = models.URLField("URL de la fuente", blank=True)
 
     def __str__(self):

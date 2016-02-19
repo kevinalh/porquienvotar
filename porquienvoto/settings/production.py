@@ -15,6 +15,7 @@ def get_env_variable(var_name):
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_env_variable("MY_KEY")
 
+WSGI_APPLICATION = '/var/www/kevinalh_pythonanywhere_com_wsgi.py'
 DEBUG = False
 
 ALLOWED_HOSTS = ['kevinalh.pythonanywhere.com']
@@ -29,5 +30,8 @@ DATABASES = {
         'USER': 'kevinalh',
         'PASSWORD': 'thenemesis12*',
         'HOST': 'kevinalh.mysql.pythonanywhere-services.com',
+        'OPTIONS': {
+          'init_command': 'SET default_storage_engine=INNODB',
+        }
     }
 }
