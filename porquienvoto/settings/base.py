@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 Django settings for porquienvoto project.
 
@@ -230,4 +229,3 @@ AUTH_PROFILE_MODULE = 'codificacion.PerfilUsuario'
 MEDIA_ROOT = 'codificacion/media'
 
 MEDIA_URL = '/media/'
->>>>>>> 3dc2471e55c0292305e8d8a8c3a25c05c1e40182

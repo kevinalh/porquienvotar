@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from .base import *
 
 from django.core.exceptions import ImproperlyConfigured
@@ -71,4 +70,3 @@ DATABASES = {
         'HOST': 'kevinalh.mysql.pythonanywhere-services.com',
     }
 }
->>>>>>> 3dc2471e55c0292305e8d8a8c3a25c05c1e40182
