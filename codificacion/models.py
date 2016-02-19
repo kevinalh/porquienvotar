@@ -40,7 +40,7 @@ class PerfilUsuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True,
                                 unique=True, related_name='perfil_usuario')
     gender = models.CharField(max_length=10, blank=True, default="", choices=GENDER_CHOICES, null=True)
-    token = models.OneToOneField(TokenUsuario, on_delete=models.SET_NULL, null=True)
+    token = models.OneToOneField(TokenUsuario, on_delete=models.SET_NULL, null=True, blank=True)
 
     def arroba(self):
         ''' Devuelve 'o', 'a' o arroba dependiendo del genero especificado por el usuario '''
