@@ -23,7 +23,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^preguntastriviales123/', include(admin.site.urls)),
     url(r'^quiz/', include('quiz.urls', namespace="quiz")),
     url(r'^codificacion/', include('codificacion.urls', namespace="codificacion")),
     url(r'^$', homviews.index_view, name="indice"),

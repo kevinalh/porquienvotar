@@ -113,3 +113,7 @@ AUTH_PROFILE_MODULE = 'codificacion.PerfilUsuario'
 MEDIA_ROOT = 'codificacion/media'
 
 MEDIA_URL = '/media/'
+
+# Security - Scoop
+
+DEBUG_PROPAGATE_EXCEPTIONS = False
