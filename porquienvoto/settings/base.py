@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'codificacion.apps.CodificacionConfig',
     'colorfield',
+    # 'django_pydenticon',
 ]
 
 MIDDLEWARE_CLASSES = [

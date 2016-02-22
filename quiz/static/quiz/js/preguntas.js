@@ -94,6 +94,9 @@ $(document).ready(function() {
 		var opciones ={
 				bars: 'horizontal',
 				legend: 'none',
+				'width': 1200,
+				'height': 800,
+				'title': 'Coincidencias con candidatos'
 		};
 		var chart = new google.visualization.BarChart(document.getElementById("barrasCanvas"));
 		chart.draw(dataCandidatos, opciones);

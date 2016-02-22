@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django.db import models
 from django.db.models.deletion import SET_NULL, CASCADE, SET_DEFAULT
 
@@ -25,7 +27,7 @@ class Partido (models.Model):
     nombre_partido = models.CharField(max_length=100, unique=True)
     web_partido = models.URLField(default='', blank=True)
     color_partido = ColorField(default='#FF0000')
-    logo_partido = models.ImageField()
+    logo_partido = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return self.nombre_partido
@@ -59,7 +61,7 @@ class Candidato (models.Model):
         return tabla
 
     def __str__(self):
-        return self.nombre_candidato
+        return self.aliascandidato()
 
     class Meta:
         managed = True
@@ -69,6 +71,7 @@ class Candidato (models.Model):
 class CategoriaPropuesta (models.Model):
     titulo_categoria = models.CharField(max_length=60)
     descripcion_categoria = models.CharField(max_length=1000)
+    entra_categoria = models.BooleanField(default=True)
     color_categoria = ColorField(default='#FF0000')
 
     def __str__(self):
@@ -76,6 +79,8 @@ class CategoriaPropuesta (models.Model):
 
     class Meta:
         managed = True
+        verbose_name = "categoria de Propuestas"
+        verbose_name_plural = "categorias de Propuestas"
         ordering = ['-id']
 
 
@@ -85,8 +90,7 @@ class Propuesta (models.Model):
     descripcion_propuesta = models.CharField(max_length=2000)
     # La propuesta en formato adecuado para un cuestionario
     pregunta_propuesta = models.CharField(max_length=2000, default='?')
-    # categoria_propuesta = models.ForeignKey(CategoriaPropuesta, null=True, on_delete=SET_NULL, blank=True)
-    categoria_propuesta = models.ForeignKey(CategoriaPropuesta, on_delete=SET_DEFAULT, default=SIN_CATEGORIZAR_ID)
+    categoria_propuesta = models.ForeignKey(CategoriaPropuesta, default=99, on_delete=SET_DEFAULT)
 
     def __str__(self):
         return self.titulo_propuesta
@@ -109,6 +113,8 @@ class RelPropuestas (models.Model):
 
     class Meta:
         managed = True
+        verbose_name = "relacion entre Propuesta y Candidato"
+        verbose_name_plural = "relaciones entre Propuestas y Candidatos"
         unique_together = ("propuesta_relpropuestas", "candidato_relpropuestas")
 
 
@@ -137,6 +143,8 @@ class IntentoVisitante (models.Model):
 
     class Meta:
         managed = True
+        verbose_name = "intento de Visitante"
+        verbose_name_plural = "intentos de Visitantes"
         unique_together = ("visitante_intento", "intento_db")
 
 
@@ -153,3 +161,4 @@ class Respuesta (models.Model):
 
     class Meta:
         managed = True
+        unique_together = ("intento_res", "pregunta_res")

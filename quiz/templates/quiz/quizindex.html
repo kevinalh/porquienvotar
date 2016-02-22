@@ -11,7 +11,7 @@
 		{% for candidato in lista_candidatos %}
 			candidatos[{{ candidato.id|escapejs }}] = {'partido': '{{ candidato.partido_candidato.nombre_partido|escapejs }}',
 			'color': '{{ candidato.partido_candidato.color_partido|escapejs }}',
-			'alias': '{{ candidato.nombre_candidato|escapejs }}' + ' ' + '{{ candidato.apellido_candidato|escapejs }}',
+			'alias': '{{ candidato.alias_candidato|escapejs }}',
 			'id' : {{ candidato.id|escapejs }}, }
 		{% endfor %}
 	</script>
@@ -52,9 +52,9 @@
 				<h3> {{ categoria.titulo_categoria }} </h3>
 				<div class="list-group">				
 					{% for propuesta in propuesta_categorizada %}
-					<li class="list-group-item"> <h4> {{ propuesta.pregunta_propuesta }} </h4>
+					<li class="list-group-item"> <h4> {{ propuesta.titulo_propuesta }} </h4>
 					<div class="descripcion_propuesta">
-						{{ propuesta.descripcion_propuesta }}
+						{{ propuesta.pregunta_propuesta }}
 					</div> 
 					<br>
 					<div class="row">					
@@ -75,6 +75,7 @@
 							</div>
 						</div>
 						<div class="col-md-4">
+							<label class="text-muted"><h6>¿Cuánta importancia tiene esto para tí?</h6></label>
 							<input id="slider_{{ propuesta.id }}" data-slider-id='slider_{{ propuesta.id }}Slider' type="text" data-slider-min="0" data-slider-max="4" data-slider-step="1" data-slider-value="2"/>
 						</div>
 					</div>
@@ -116,12 +117,12 @@
 		<section>
 			<h2> Resultados </h2>
 			<div class="row">
-				<div id="barrasCanvas" width="600" height="400"></div>
+				<div id="barrasCanvas" width="1200" height="800"></div>
 				<hr>
 			</div>
 		</section>
 		<section>
-			<h2>¿Cómo te comparas?</h2>
+			<h2>¿C&#243mo te comparas?</h2>
 			<div class="row top1">
 				<div class="col-md-2">
 				    	<ul class="nav nav-tabs nav-stacked" role="tablist" id="tabsCandidatos">

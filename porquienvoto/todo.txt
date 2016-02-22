@@ -3,4 +3,4 @@
 	y los grados de fuerza para cada uno se den a partir de cuántas veces se presiona el botón.
 
 - Complejidad en el coding:
-	Para reducir complejidad, que los candidatos sólo puedan tener opciones agree/disagree/neutral.
+	Para reducir complejidad, que los candidatos sólo puedan tener opciones agree/disagree/neutral. (Done)

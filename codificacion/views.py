@@ -2,6 +2,7 @@
 
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.exceptions import ObjectDoesNotExist
 
 from quiz.models import CategoriaPropuesta, Propuesta, Candidato, RelPropuestas
 
@@ -9,7 +10,8 @@ from .forms import RespuestaForm, TokenForm
 from .models import TokenUsuario, Opinion_RelPropuesta
 from django.shortcuts import redirect
 
-# import pdb
+import pdb
+import itertools
 
 # Tests
 
@@ -27,16 +29,26 @@ def CodeIndex(request):
                         " seleccionados para participar en el proyecto, que aún es cerrado")
     categorias = get_list_or_404(CategoriaPropuesta)
     propuestas = {}
+    progresos = {}
+    # numcandidatos = Candidato.objects.count()
     for categoria in categorias:
         propuestas[categoria] = categoria.propuesta_set.all()
     token_correcto = usuario.perfil_usuario.revisar_token()
+
+    for propuesta in list(itertools.chain.from_iterable(propuestas.values())):
+        progresos[propuesta] = Opinion_RelPropuesta.objects.filter(relpropuesta__propuesta_relpropuestas=propuesta) \
+                                .count()
+
+    pdb.set_trace()
 
     context = {'arroba': usuario.perfil_usuario.arroba(),
                'genero': usuario.perfil_usuario.gender,
                'tokendesc': tokendescription,
                'propuestas': propuestas,
-               'categorias': categorias,
-               'token_falta': not token_correcto, }
+               # 'categorias': categorias,
+               # 'numcandidatos': numcandidatos,
+               'token_falta': not token_correcto,
+               'progresos': progresos, }
 
     if request.method == 'POST' and not token_correcto:
         tokenform = context['formulario'] = TokenForm(request.POST)
@@ -57,7 +69,12 @@ def CodeIndex(request):
 @login_required
 def ConfigCuenta(request):
     usuario = request.user
-    context = {'usuario': usuario, }
+    try:
+        aportes = Opinion_RelPropuesta.objects.filter(user=usuario.perfil_usuario).order_by('-tiempo_subida')[:10]
+    except ObjectDoesNotExist:
+        aportes = False
+    context = {'usuario': usuario,
+               'aportes': aportes}
     return render(request, 'codificacion/configcuenta.html', context)
 
 

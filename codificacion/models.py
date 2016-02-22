@@ -1,9 +1,12 @@
+# -*- encoding: utf-8 -*-
+
 from django.contrib.auth.models import User
 from django.db import models
 
 import uuid
 
 from quiz.models import RelPropuestas
+
 
 FUENTES_POSIBLES = (('Plan_de_Gobierno', 'Plan de Gobierno'),
                     ('Entrevista_TV', 'Entrevista (TV)'),

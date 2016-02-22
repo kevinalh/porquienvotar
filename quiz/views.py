@@ -15,7 +15,7 @@ from django.core.exceptions import ValidationError, MultipleObjectsReturned
 def quizindex(request):
     # lista_propuestas = get_list_or_404(Propuesta, entra_propuesta=True)
     lista_candidatos = get_list_or_404(Candidato)
-    lista_categorias = get_list_or_404(CategoriaPropuesta)
+    lista_categorias = get_list_or_404(CategoriaPropuesta, entra_categoria=True)
     diccionario = {}
 
     for candidato_bucle in lista_candidatos:

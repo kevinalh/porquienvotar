@@ -54,7 +54,7 @@
 		<div class="col-md-2">
 			<ul class="nav nav-tabs nav-stacked" role="tablist">
 			 	 <li role="presentation"><h4>Categorías</h4></li>
-				{% for categoria, valores in propuestas.items %} 
+				{% for categoria in propuestas.keys %} 
 					  <li role="presentation">
 					  	<a href="#{{ categoria.id }}" aria-controls="{{ categoria.id }}" role="tab" data-toggle="tab">
 					  		{{ categoria }}
@@ -73,6 +73,7 @@
 							<li class="list-group-item">
 								<h4>
 									{{ propuesta.titulo_propuesta }}
+									<span class="badge">{{ progresos.propuesta }}</span>
 									<a class="btn btn-info pull-right" href="{% url 'codificacion:propdetalle' propuesta.id %}" role="button">Editar</a>
 								</h4>
 								<p>{{ propuesta.descripcion_propuesta }}</p>
