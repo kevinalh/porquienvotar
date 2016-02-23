@@ -46,6 +46,7 @@ class Candidato (models.Model):
     partido_candidato = models.OneToOneField(Partido, null=True, on_delete=CASCADE)
     alias_candidato = models.CharField(max_length=70, blank=True, default="", unique=True)
     slug_candidato = models.SlugField(blank=True, null=True, unique=True)
+    voto_informado = models.URLField(default="", blank=True)
 
     def aliascandidato(self):
         if (self.alias_candidato == ""):

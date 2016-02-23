@@ -32,10 +32,15 @@
 		        <button type="submit" class="save btn btn-default">Enviar</button>
 			</form>
 		</div>
-		<div class="col-md-7">
-			<embed src="{% static urlpdf %}" width="600" height="600" type='application/pdf'>
+		<div class="col-md-7 planpdf embed-responsive embed-responsive-16by9">
+			<object	data="{% static urlpdf %}#toolbar=1&amp;navpanes=0&amp;scrollbar=1&amp;page=1&amp;view=FitH" 
+	        		type="application/pdf" 
+	        		class="embed-responsive-item">
+				<p>Parece que no tienes el plugin de Adobe Reader; puedes descargar el plan de gobierno 
+				<a href="{% static urlpdf %}">aqu&#x00ed;</a></p>
+			</object>
 		</div>
 	</div>
-	
+
 
 {% endblock content %}
