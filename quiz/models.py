@@ -28,7 +28,7 @@ class Partido (models.Model):
     nombre_partido = models.CharField(max_length=100, unique=True)
     web_partido = models.URLField(default='', blank=True)
     color_partido = ColorField(default='#FF0000')
-    logo_partido = models.FilePathField(path=settings.CARPETA_LOGOS, recursive=True, blank=True, null=True)
+    slug_partido = models.SlugField(blank=True, null=True)
 
     def __str__(self):
         return self.nombre_partido
@@ -45,7 +45,7 @@ class Candidato (models.Model):
     web_candidato = models.URLField(default="", blank=True)
     partido_candidato = models.OneToOneField(Partido, null=True, on_delete=CASCADE)
     alias_candidato = models.CharField(max_length=70, blank=True, default="")
-    plan_de_gobierno = models.FilePathField(path=settings.CARPETA_PDFS, recursive=True, blank=True, null=True)
+    slug_candidato = models.SlugField(blank=True, null=True)
 
     def aliascandidato(self):
         if (self.alias_candidato == ""):

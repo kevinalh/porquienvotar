@@ -83,7 +83,7 @@ class Opinion_RelPropuesta(models.Model):
     # Necesarios
     justificacion = models.TextField("justificacion", max_length=2000, blank=True)
     fuente = models.CharField(default='Plan_de_Gobierno', max_length=25, choices=FUENTES_POSIBLES)
-    valor_propuesta = models.SmallIntegerField("posicion", default=0, choices=VOTOS_PERMITIDOS)
+    valor_propuesta = models.SmallIntegerField("posicion", default=None, choices=VOTOS_PERMITIDOS)
 
     # Opcionales segun fuente
     paginadelplan = models.PositiveSmallIntegerField("pagina del Plan", default=None, blank=True, null=True)
