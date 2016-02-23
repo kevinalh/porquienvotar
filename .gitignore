@@ -8,7 +8,6 @@ db.postgresql
 *.swp
 local_settings.py
 settings.py
-*.json
 .jshintrc
 .jsdtscope
 org.eclipse.*
@@ -18,3 +17,4 @@ com.eclipsesource.*
 porquienvoto/settings/local.py
 scripts_auxiliares/*
 */migrations/*
+dumpdata/
