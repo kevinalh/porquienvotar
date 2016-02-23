@@ -12,6 +12,7 @@ from django.shortcuts import redirect
 
 # import pdb
 import itertools
+from django.conf import settings
 
 # Tests
 
@@ -122,10 +123,14 @@ def CandProp(request, propuesta_id, candidato_id):
         formulario = RespuestaForm(data)
     else:
         formulario = RespuestaForm()
+
+    urlpdf = settings.STATIC_URL + 'codificacion/pdf/' + str(candidato.slug_candidato) + '.pdf'
+
     context = {'usuario': usuario,
                'propuesta': propuesta,
                'candidato': candidato,
-               'form': formulario, }
+               'form': formulario,
+               'urlpdf': urlpdf, }
     return render(request, 'codificacion/candprop.html', context)
 
 # @login_required
