@@ -18,3 +18,4 @@ porquienvoto/settings/local.py
 scripts_auxiliares/*
 */migrations/*
 dumpdata/
+pdfjs/

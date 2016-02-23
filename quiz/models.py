@@ -42,9 +42,13 @@ class Candidato (models.Model):
     segundonombre_candidato = models.CharField(max_length=40, blank=True)
     apellido_candidato = models.CharField(max_length=50, blank=True)
     segundoapellido_candidato = models.CharField(max_length=50, blank=True)
+    alias_candidato = models.CharField(max_length=70, blank=True, default="", unique=True)
+
+    entra_candidato = models.BooleanField(default=True)
+
     web_candidato = models.URLField(default="", blank=True)
     partido_candidato = models.OneToOneField(Partido, null=True, on_delete=CASCADE)
-    alias_candidato = models.CharField(max_length=70, blank=True, default="", unique=True)
+
     slug_candidato = models.SlugField(blank=True, null=True, unique=True)
     voto_informado = models.URLField(default="", blank=True)
 
