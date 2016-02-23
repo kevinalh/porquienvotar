@@ -33,11 +33,7 @@
 			</form>
 		</div>
 		<div class="col-md-7">
-			{% if pdf_path %}
-				<embed src="{{ STATIC_URL }}/codificacion/pdf/{{ candidato.slug_candidato }}.pdf" width="600" height="600" type='application/pdf'>
-			{% else %}
-				No se pudo cargar el PDF correspondiente al plan de gobierno.
-			{% endif %}
+			<embed src="{{ STATIC_URL }}/codificacion/pdf/{{ candidato.slug_candidato }}.pdf" width="600" height="600" type='application/pdf'>
 		</div>
 	</div>
 	

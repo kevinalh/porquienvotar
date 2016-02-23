@@ -122,12 +122,10 @@ def CandProp(request, propuesta_id, candidato_id):
         formulario = RespuestaForm(data)
     else:
         formulario = RespuestaForm()
-    pdf_path = candidato.plan_de_gobierno
     context = {'usuario': usuario,
                'propuesta': propuesta,
                'candidato': candidato,
-               'form': formulario,
-               'pdf_path': pdf_path, }
+               'form': formulario, }
     return render(request, 'codificacion/candprop.html', context)
 
 # @login_required
