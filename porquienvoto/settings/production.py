@@ -50,3 +50,4 @@ DATABASES = {
 }
 
 CARPETA_PDFS = STATIC_URL + "codificacion/pdf"
+CARPETA_LOGOS = STATIC_URL + "quiz/img"

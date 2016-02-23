@@ -28,7 +28,7 @@ class Partido (models.Model):
     nombre_partido = models.CharField(max_length=100, unique=True)
     web_partido = models.URLField(default='', blank=True)
     color_partido = ColorField(default='#FF0000')
-    logo_partido = models.ImageField(blank=True, null=True)
+    logo_partido = models.FilePathField(path=settings.CARPETA_LOGOS, recursive=True, blank=True, null=True)
 
     def __str__(self):
         return self.nombre_partido
