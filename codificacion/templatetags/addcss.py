@@ -17,3 +17,8 @@ def add_attributes(field, css):
             attrs[t] = v
 
     return field.as_widget(attrs=attrs)
+
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)

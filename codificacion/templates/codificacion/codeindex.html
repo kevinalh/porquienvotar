@@ -73,7 +73,7 @@
 							<li class="list-group-item">
 								<h4>
 									{{ propuesta.titulo_propuesta }}
-									<span class="badge">{{ progresos.propuesta }}</span>
+									<span class="badge">{{ progresos|get_item:propuesta }}</span>
 									<a class="btn btn-info pull-right" href="{% url 'codificacion:propdetalle' propuesta.id %}" role="button">Editar</a>
 								</h4>
 								<p>{{ propuesta.descripcion_propuesta }}</p>

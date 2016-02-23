@@ -17,18 +17,29 @@
 		<h3>Posición de {{ candidato.nombre_candidato }} {{ candidato.apellido_candidato }} con respecto a: </h3>
 		<h2> {{ propuesta.titulo_propuesta }} </h2>
 	</header>
-
-	<form method="POST" class="post-form" id="formulario_usuarios">
-		{% csrf_token %}
-		{% for form_section in form %}
-			<div class="form-group">
-				{{ form_section.label_tag }}
-				{{ form_section|add_attributes:"form-control" }}
-				{{ form_section.errors }}
-			</div>
-		{% endfor %}
-        <button type="submit" class="save btn btn-default">Enviar</button>
-	</form>
+	
+	<div class="row">
+		<div class="col-md-5">
+			<form method="POST" class="post-form" id="formulario_usuarios">
+				{% csrf_token %}
+				{% for form_section in form %}
+					<div class="form-group">
+						{{ form_section.label_tag }}
+						{{ form_section|add_attributes:"form-control" }}
+						{{ form_section.errors }}
+					</div>
+				{% endfor %}
+		        <button type="submit" class="save btn btn-default">Enviar</button>
+			</form>
+		</div>
+		<div class="col-md-7">
+			{% if pdf_path %}
+				<embed src="{{ pdf_path }}" width="600" height="600" type='application/pdf'>
+			{% else %}
+				No se pudo cargar el PDF correspondiente al plan de gobierno.
+			{% endif %}
+		</div>
+	</div>
 	
 
 {% endblock content %}

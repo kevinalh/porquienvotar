@@ -10,7 +10,7 @@ from .forms import RespuestaForm, TokenForm
 from .models import TokenUsuario, Opinion_RelPropuesta
 from django.shortcuts import redirect
 
-import pdb
+# import pdb
 import itertools
 
 # Tests
@@ -39,7 +39,7 @@ def CodeIndex(request):
         progresos[propuesta] = Opinion_RelPropuesta.objects.filter(relpropuesta__propuesta_relpropuestas=propuesta) \
                                 .count()
 
-    pdb.set_trace()
+    # pdb.set_trace()
 
     context = {'arroba': usuario.perfil_usuario.arroba(),
                'genero': usuario.perfil_usuario.gender,
@@ -112,8 +112,8 @@ def CandProp(request, propuesta_id, candidato_id):
             post.relpropuesta = relpropuesta_tmp
             post.save()
             return redirect('propdetalle', propuesta_id=propuesta_id)
-    elif Opinion_RelPropuesta.objects.filter(user=usuario, relpropuesta=relpropuesta_tmp).exists():
-        opinion = Opinion_RelPropuesta.objects.get(user=usuario, relpropuesta=relpropuesta_tmp)
+    elif Opinion_RelPropuesta.objects.filter(user=usuario.perfil_usuario, relpropuesta=relpropuesta_tmp).exists():
+        opinion = Opinion_RelPropuesta.objects.get(user=usuario.perfil_usuario, relpropuesta=relpropuesta_tmp)
         data = {'justificacion': opinion.justificacion,
                 'fuente': opinion.fuente,
                 'valor_propuesta': opinion.valor_propuesta,
@@ -122,10 +122,12 @@ def CandProp(request, propuesta_id, candidato_id):
         formulario = RespuestaForm(data)
     else:
         formulario = RespuestaForm()
+    pdf_path = candidato.plan_de_gobierno
     context = {'usuario': usuario,
                'propuesta': propuesta,
                'candidato': candidato,
-               'form': formulario, }
+               'form': formulario,
+               'pdf_path': pdf_path, }
     return render(request, 'codificacion/candprop.html', context)
 
 # @login_required

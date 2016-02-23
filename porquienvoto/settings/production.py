@@ -48,3 +48,5 @@ DATABASES = {
         }
     }
 }
+
+CARPETA_PDFS = STATIC_URL + "codificacion/pdf"

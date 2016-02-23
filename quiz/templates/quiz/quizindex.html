@@ -17,6 +17,7 @@
 	</script>
 	<script src="{% static "quiz/js/preguntas.js" %}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.0.16/bootstrap-slider.min.js"></script>
+	
 {% endblock scripts %}
 
 {% block estilos %}
@@ -62,15 +63,15 @@
 							<div class="btn-group-justified opciones_quiz" role="group" data-toggle="buttons">
 							  <label class="btn btn-default boton_{{ propuesta.id }}">
 							    <input type="radio" name="op_{{ propuesta.id }}" id="td_{{ propuesta.id }}" autocomplete="off" value="-1" />
-							    <i class="fa fa-thumbs-down"></i>
+							    <i class="fa fa-thumbs-down" title="En desacuerdo"></i>
 							  </label>
 							  <label class="btn btn-default boton_{{ propuesta.id }}">
 							    <input type="radio" name="op_{{ propuesta.id }}" id="d_{{ propuesta.id }}" autocomplete="off"  value="0" />
-								<i class="fa fa-circle-o"></i>
+								<i class="fa fa-circle-o" title="Neutral"></i>
 							  </label>
 							  <label class="btn btn-default boton_{{ propuesta.id }}">
 							    <input type="radio" name="op_{{ propuesta.id }}" id="n_{{ propuesta.id }}" autocomplete="off"  value="1" />
-							    <i class="fa fa-thumbs-up"></i>
+							    <i class="fa fa-thumbs-up" title="De acuerdo"></i>
 							  </label>
 							</div>
 						</div>

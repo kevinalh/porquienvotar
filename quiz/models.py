@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.db.models.deletion import SET_NULL, CASCADE, SET_DEFAULT
+from django.conf import settings
 
 # from django.db.models.signals import post_save
 # from .signals.handlers import relaciona_propuestas
@@ -44,6 +45,7 @@ class Candidato (models.Model):
     web_candidato = models.URLField(default="", blank=True)
     partido_candidato = models.OneToOneField(Partido, null=True, on_delete=CASCADE)
     alias_candidato = models.CharField(max_length=70, blank=True, default="")
+    plan_de_gobierno = models.FilePathField(path=settings.CARPETA_PDFS, recursive=True, blank=True, null=True)
 
     def aliascandidato(self):
         if (self.alias_candidato == ""):

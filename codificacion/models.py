@@ -86,8 +86,8 @@ class Opinion_RelPropuesta(models.Model):
     valor_propuesta = models.SmallIntegerField("posicion", default=0, choices=VOTOS_PERMITIDOS)
 
     # Opcionales segun fuente
-    paginadelplan = models.PositiveSmallIntegerField("pagina del Plan", default=0, blank=True)
-    link_fuente = models.URLField("URL de la fuente", blank=True)
+    paginadelplan = models.PositiveSmallIntegerField("pagina del Plan", default=None, blank=True, null=True)
+    link_fuente = models.URLField("URL de la fuente", blank=True, null=True, default=None)
 
     def __str__(self):
         return ('Opinion de ' + self.user.username + 'sobre ' + self.relpropuesta.propuesta_relpropuestas +
