@@ -12,45 +12,48 @@
 
 {% block content %}
 
+	<div>
+		<ol class="breadcrumb">
+		  <li><a href="{% url 'codificacion:codeindex' %}">Index</a></li>
+		  <li class="active">Propuesta actual</li>
+		</ol>
+	</div>
+
 	<header>
 		<h2> {{ propuesta.titulo_propuesta }} </h2>
 	</header>
 		
 	<article>
-
-		<div data-spy="scroll" data-target="#navegacioncandidatos">
-			<div class="col-md-2" id="navegacioncandidatos">
-		    	<ul class="nav nav-tabs nav-stacked" role="tablist">
-		    		{% for candidato, relpropuesta in relpropuestas.items %}
-		      			<li><a href="#{{ candidato.id }}">{{ candidato.partido_candidato.nombre_partido }}</a></li>
-		      		{% endfor %}
-		    	</ul>
-		  	</div>
 		  	
-		  	<div class="col-md-10">
-		  		<ul class="list-group">
-					{% for candidato, relpropuesta in relpropuestas.items %}
-						<li class="list-group-item">
-							<div id="{{ candidato.id }}">
-								<div class="media">
-								  	<div class="media-left">
-								      	<img class="media-object" src="{{ candidato.partido_candidato.logo_partido }}" alt="...">
-								  	</div>
-								  	<div class="media-body">
-								    	<h4 class="media-heading">
-								    		{{ candidato.nombre_candidato }} {{ candidato.apellido_candidato }}
-								    		{% if token_correcto %}
-								    			<a class="btn btn-info pull-right" href="{% url 'codificacion:candprop' propuesta.id candidato.id %}" role="button">Editar</a>
-								    		{% endif %}
-								    	</h4>
-							  			<p>{{ relpropuesta.valor_propuesta }}</p>
-								  	</div>
-								</div
-							</div>
-						</li>
-					{% endfor %}
-				</ul>
-			</div>
+	  	<div class="col-md-12">
+	  		<ul class="list-group">
+				{% for candidato, relpropuesta in relpropuestas.items %}
+					<li class="list-group-item">
+						<div id="{{ candidato.id }}">
+							<div class="media">
+							  	<div class="media-left">
+							      	<img class="media-object img-rounded thumbnails-partidos" src="{{ imgslugs }}{{ candidato.slug_candidato }}.jpg" alt="...">
+							  	</div>
+							  	<div class="media-body">
+							    	<h4 class="media-heading">
+							    		{{ candidato.alias_candidato }} | {{ candidato.partido_candidato.nombre_partido }}
+							    		{% if token_correcto %}
+							    			<a class="btn btn-info pull-right" href="{% url 'codificacion:candprop' propuesta.id candidato.id %}" role="button">Editar</a>
+							    		{% endif %}
+							    	</h4>
+						  			<p>{{ relpropuesta.opinion }} {{ relpropuesta.progreso }}</p>
+						  			<div class="progress">
+									  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+									    <span class="sr-only">40% Complete (success)</span>
+									  </div>
+									</div>
+							  	</div>
+							</div
+						</div>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
 		  	
 		</div>
 		

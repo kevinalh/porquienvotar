@@ -109,6 +109,8 @@ LOGOUT_URL = 'logout'
 
 AUTH_PROFILE_MODULE = 'codificacion.PerfilUsuario'
 
+LOGIN_REDIRECT_URL = 'cuenta/'
+
 # Media
 
 MEDIA_ROOT = 'codificacion/media'

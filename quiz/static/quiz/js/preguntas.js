@@ -11,9 +11,9 @@ google.charts.load('current', {packages: ['corechart','bar']});
 
 $(document).ready(function() {
 
-	google.charts.setOnLoadCallback(preDibujar);
 	$("#barra_error").hide();
 	$("#boton_retroceso").hide();
+	google.charts.setOnLoadCallback(preDibujar);
 	function preDibujar() {
 		$(".enviar").click(function(event) {
 			var contador = 0;
@@ -91,11 +91,17 @@ $(document).ready(function() {
 		dataCandidatos.addColumn({ type: 'string', role: 'style' });
 		dataCandidatos.addRows(tablaCandidatos);
 		dataCandidatos.sort({column: 1, desc: true});
+		var ancho = 1200;
+		var multiplicador = 0;
+		for (var k in candidatos) {
+			if (candidatos.hasOwnProperty(k)) multiplicador++;
+		}
+		var altura = 45*multiplicador;
 		var opciones ={
 				bars: 'horizontal',
 				legend: 'none',
-				'width': 1200,
-				'height': 800,
+				'width': ancho, // 1200
+				'height': altura, // 800
 				'title': 'Coincidencias con candidatos'
 		};
 		var chart = new google.visualization.BarChart(document.getElementById("barrasCanvas"));

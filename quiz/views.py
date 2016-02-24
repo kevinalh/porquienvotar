@@ -14,7 +14,7 @@ from django.core.exceptions import ValidationError, MultipleObjectsReturned
 
 def quizindex(request):
     # lista_propuestas = get_list_or_404(Propuesta, entra_propuesta=True)
-    lista_candidatos = get_list_or_404(Candidato)
+    lista_candidatos = get_list_or_404(Candidato, entra_candidato=True)
     lista_categorias = get_list_or_404(CategoriaPropuesta, entra_categoria=True)
     diccionario = {}
 
@@ -39,8 +39,8 @@ def quizindex(request):
 def enviardata(request):
     # DEPLOYMENT: Recordar cambiar get_ip a get_real_ip
     if request.method == 'POST':
-        ip = get_real_ip(request)
-        # ip = get_ip(request)
+        # ip = get_real_ip(request)
+        ip = get_ip(request)
         logger = logging.getLogger(__name__)
 
         if ip is not None:

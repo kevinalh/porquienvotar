@@ -18,8 +18,11 @@
 	<header>
 	
 		<div>
+			{% if primer_login %}
 			<div class="intro-lead-in text-center"><h1>Bienvenid{{ arroba }} de vuelta, {{ user.username }}</h1></div>
-	
+			{% else %}
+			<div class="intro-lead-in text-center"><h1>&#161;Gracias por registrarte!</h1></div>
+			{% endif %}
 	{% if token_falta %}
 	
 	    	<div class="jumbotron">

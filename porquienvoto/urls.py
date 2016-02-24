@@ -17,22 +17,14 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from homepage import views as homviews
 from django.contrib.auth import views as auth_views
-from codificacion.views import ConfigCuenta, RedirectCuenta
-from django.views.generic.edit import CreateView
-from django.contrib.auth.forms import UserCreationForm
-
+from codificacion.views import ConfigCuenta, RedirectCuenta, Registro
 
 urlpatterns = [
     url(r'^preguntastriviales123/', include(admin.site.urls)),
     url(r'^quiz/', include('quiz.urls', namespace="quiz")),
     url(r'^codificacion/', include('codificacion.urls', namespace="codificacion")),
     url(r'^$', homviews.index_view, name="indice"),
-    url(r'^registro/$', CreateView.as_view(
-                                           template_name='cuentas/register.html',
-                                           form_class=UserCreationForm,
-                                           success_url='/'
-                                           ), name='registro'
-        ),
+    url(r'^registro/$', Registro, name='registro'),
     url(r'^login/', auth_views.login, {'template_name': 'cuentas/loginpage.html'}, name='login'),
     url(r'^change_password/', auth_views.password_change,
         {'template_name': 'cuentas/change_password.html'}, name='change_password'),

@@ -38,7 +38,7 @@
 	    {% endif %}
 	{% endif %}
 	
-	<div class="col-md-8">
+	<div class="col-md-13">
 		<form method="post" action="{% url 'login' %}" class="form-signin">
 			{% csrf_token %}
 	        <h2 class="form-signin-heading">Ingrese sus datos</h2>
@@ -64,15 +64,11 @@
 	          	</label>
 	        </div>
 	        <button class="btn btn-sm btn-primary btn-block" type="submit" value="login">Ingresar</button>
+	        <br>
+	        <p>Si no tienes una cuenta, debes registrarte primero:</p>	        
+	        <p><a class="btn btn-warning btn-sm" href="{% url 'registro' %}" role="button">Registrarse</a></p>
 	        <input type="hidden" name="next" value="{{ next }}" />
 		</form>
-	</div>
-	<div class="col-md-4">
-		<div class="jumbotron">
-			<h4>¿No tienes una cuenta?</h4>
-			<br />
-			<p><a class="btn btn-warning btn-sm" href="{% url 'registro' %}" role="button">Registrarse</a></p>
-		</div>		
 	</div>
 
 {% comment %}

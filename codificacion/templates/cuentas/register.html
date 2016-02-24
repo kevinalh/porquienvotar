@@ -2,6 +2,10 @@
 {% load staticfiles %}
 {% load addcss %}
 
+{% block title %}
+Registro | PQV
+{% endblock title %}
+
 {% block navegacion %}
 <li><a href="{% url 'indice' %}">Inicio</a></li>
 <li><a href="{% url 'quiz:quizindex' %}">Preguntas</a></li>
@@ -42,6 +46,7 @@
 			{{ form.password2.help_text }}
 		</span>
     </div>
+    <input name="next" type="hidden" value="{{ next }}">
 	<button type="submit" class="btn btn-info">Registrarse</button>
 </form>
 {% endblock content %}

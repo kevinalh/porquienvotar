@@ -2,12 +2,12 @@
 
 from django.db import models
 from django.db.models.deletion import SET_NULL, CASCADE, SET_DEFAULT
-from django.conf import settings
 
 # from django.db.models.signals import post_save
 # from .signals.handlers import relaciona_propuestas
 
 from colorfield.fields import ColorField
+import codificacion
 
 VOTOS_PERMITIDOS = ((-1, 'En desacuerdo -'),
                     (0, 'Neutral'),
@@ -49,7 +49,7 @@ class Candidato (models.Model):
     web_candidato = models.URLField(default="", blank=True)
     partido_candidato = models.OneToOneField(Partido, null=True, on_delete=CASCADE)
 
-    slug_candidato = models.SlugField(blank=True, null=True, unique=True)
+    slug_candidato = models.SlugField(null=True, unique=True)
     voto_informado = models.URLField(default="", blank=True)
 
     def aliascandidato(self):
@@ -112,6 +112,21 @@ class RelPropuestas (models.Model):
     justificacion = models.CharField(max_length=2000, default="", blank=True)
     paginadelplan = models.PositiveSmallIntegerField(default=0, blank=True)
     valor_propuesta = models.SmallIntegerField(default=None, null=True, blank=True, choices=VOTOS_PERMITIDOS)
+
+    def opinion(self):
+        tmp_valor = self.valor_propuesta
+        if tmp_valor == -1:
+            return "En desacuerdo"
+        elif tmp_valor == 0:
+            return "Neutral"
+        elif tmp_valor == 1:
+            return "De acuerdo"
+        else:
+            return "Sin opini&#243;n"
+
+    def progreso(self):
+        num_opiniones = codificacion.models.Opinion_RelPropuesta.objects.filter(relpropuesta=self).count()
+        return num_opiniones
 
     def __str__(self):
         return '%s : %s' % (self.candidato_relpropuestas.nombre_candidato,

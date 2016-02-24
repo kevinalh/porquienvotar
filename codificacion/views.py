@@ -9,6 +9,8 @@ from quiz.models import CategoriaPropuesta, Propuesta, Candidato, RelPropuestas
 from .forms import RespuestaForm, TokenForm
 from .models import TokenUsuario, Opinion_RelPropuesta
 from django.shortcuts import redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
 
 # import pdb
 import itertools
@@ -41,6 +43,7 @@ def CodeIndex(request):
                                 .count()
 
     # pdb.set_trace()
+    primer_login = usuario.last_login
 
     context = {'arroba': usuario.perfil_usuario.arroba(),
                'genero': usuario.perfil_usuario.gender,
@@ -49,7 +52,8 @@ def CodeIndex(request):
                # 'categorias': categorias,
                # 'numcandidatos': numcandidatos,
                'token_falta': not token_correcto,
-               'progresos': progresos, }
+               'progresos': progresos,
+               'primer_login': primer_login}
 
     if request.method == 'POST' and not token_correcto:
         tokenform = context['formulario'] = TokenForm(request.POST)
@@ -86,13 +90,15 @@ def PropuestaDetalle(request, propuesta_id):
     lista_candidatos = get_list_or_404(Candidato)
     relpropuestas = {}
     token_correcto = usuario.perfil_usuario.revisar_token()
+    imgslugs = settings.STATIC_URL + 'codificacion/img/'
     for candidato in lista_candidatos:
         relpropuestas[candidato] = RelPropuestas.objects.get(candidato_relpropuestas=candidato,
                                                              propuesta_relpropuestas=propuesta)
     context = {'usuario': usuario,
                'propuesta': propuesta,
                'relpropuestas': relpropuestas,
-               'token_correcto': token_correcto, }
+               'token_correcto': token_correcto,
+               'imgslugs': imgslugs, }
     return render(request, 'codificacion/propdetalle.html', context)
 
 
@@ -109,10 +115,10 @@ def CandProp(request, propuesta_id, candidato_id):
         formulario = RespuestaForm(request.POST)
         if formulario.is_valid():
             post = formulario.save(commit=False)
-            post.user = usuario
+            post.user = usuario.perfil_usuario
             post.relpropuesta = relpropuesta_tmp
             post.save()
-            return redirect('propdetalle', propuesta_id=propuesta_id)
+            return redirect('codificacion:propdetalle', propuesta_id=propuesta_id)
     elif Opinion_RelPropuesta.objects.filter(user=usuario.perfil_usuario, relpropuesta=relpropuesta_tmp).exists():
         opinion = Opinion_RelPropuesta.objects.get(user=usuario.perfil_usuario, relpropuesta=relpropuesta_tmp)
         data = {'justificacion': opinion.justificacion,
@@ -140,6 +146,22 @@ def CandProp(request, propuesta_id, candidato_id):
 
 def RedirectCuenta(request):
     return redirect('cuenta')
+
+
+def Registro(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(request, new_user)
+            return redirect('codificacion:codeindex')
+    else:
+        form = UserCreationForm()
+    context = {'form': form, }
+    return render(request, 'cuentas/register.html', context)
 
 
 def LoginPage(request):
