@@ -39,8 +39,8 @@ def quizindex(request):
 def enviardata(request):
     # DEPLOYMENT: Recordar cambiar get_ip a get_real_ip
     if request.method == 'POST':
-        # ip = get_real_ip(request)
-        ip = get_ip(request)
+        ip = get_real_ip(request)
+        # ip = get_ip(request)
         logger = logging.getLogger(__name__)
 
         if ip is not None:
