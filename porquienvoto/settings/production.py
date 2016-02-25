@@ -19,7 +19,7 @@ ROOT_URLCONF = "porquienvoto.urls"
 
 WSGI_APPLICATION = '/var/www/kevinalh_pythonanywhere_com_wsgi.py'
 DEBUG = False
-ALLOWED_HOSTS = ['kevinalh.pythonanywhere.com']
+ALLOWED_HOSTS = ['www.porquienvotar.org']
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
