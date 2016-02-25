@@ -19,3 +19,4 @@ scripts_auxiliares/*
 */migrations/*
 dumpdata/
 pdf.js/
+ssl/
