@@ -10,6 +10,7 @@ from django.db.models import Max
 from ipware.ip import get_real_ip, get_ip
 # import pdb
 from django.core.exceptions import ValidationError, MultipleObjectsReturned
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
 def quizindex(request):
@@ -36,6 +37,7 @@ def quizindex(request):
     return render(request, 'quiz/quizindex.html', context)
 
 
+@ensure_csrf_cookie
 def enviardata(request):
     # DEPLOYMENT: Recordar cambiar get_ip a get_real_ip
     if request.method == 'POST':
