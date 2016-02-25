@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'codificacion.apps.CodificacionConfig',
     'colorfield',
+    'simple_history',
     # 'django_pydenticon',
 ]
 
@@ -40,6 +41,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'porquienvoto.urls'

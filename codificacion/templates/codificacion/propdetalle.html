@@ -18,6 +18,18 @@
 		  <li class="active">Propuesta actual</li>
 		</ol>
 	</div>
+	
+	{% if messages %}
+	<ul class="messages">
+	    {% for message in messages %}
+	    <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Importante: {% endif %}
+	        {{ message }}
+		</div>
+	    {% endfor %}
+	</ul>
+	{% endif %}
 
 	<header>
 		<h2> {{ propuesta.titulo_propuesta }} </h2>

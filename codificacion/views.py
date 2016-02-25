@@ -11,6 +11,7 @@ from .models import TokenUsuario, Opinion_RelPropuesta
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
 # import pdb
 import itertools
@@ -112,13 +113,23 @@ def CandProp(request, propuesta_id, candidato_id):
                                          candidato_relpropuestas=candidato,
                                          propuesta_relpropuestas=propuesta, )
     if request.method == "POST":
-        formulario = RespuestaForm(request.POST)
-        if formulario.is_valid():
-            post = formulario.save(commit=False)
-            post.user = usuario.perfil_usuario
-            post.relpropuesta = relpropuesta_tmp
-            post.save()
-            return redirect('codificacion:propdetalle', propuesta_id=propuesta_id)
+        if Opinion_RelPropuesta.objects.filter(user=usuario.perfil_usuario, relpropuesta=relpropuesta_tmp).exists():
+            opinion = Opinion_RelPropuesta.objects.get(user=usuario.perfil_usuario,
+                                                       relpropuesta=relpropuesta_tmp,)
+            formulario = RespuestaForm(request.POST, instance=opinion)
+            if formulario.is_valid():
+                formulario.save()
+                mensaje = 'Su punto de vista ha sido actualizado correctamente.'
+        else:
+            formulario = RespuestaForm(request.POST)
+            if formulario.is_valid():
+                opinion = formulario.save(commit=False)
+                opinion.user = usuario.perfil_usuario
+                opinion.relpropuesta = relpropuesta_tmp
+                opinion.save()
+                mensaje = 'Su punto de vista ha sido guardado correctamente.'
+        messages.add_message(request, messages.SUCCESS, mensaje)
+        return redirect('codificacion:propdetalle', propuesta_id=propuesta_id)
     elif Opinion_RelPropuesta.objects.filter(user=usuario.perfil_usuario, relpropuesta=relpropuesta_tmp).exists():
         opinion = Opinion_RelPropuesta.objects.get(user=usuario.perfil_usuario, relpropuesta=relpropuesta_tmp)
         data = {'justificacion': opinion.justificacion,

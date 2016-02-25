@@ -6,6 +6,7 @@ from django.db import models
 import uuid
 
 from quiz.models import RelPropuestas
+from simple_history.models import HistoricalRecords
 
 
 FUENTES_POSIBLES = (('Plan_de_Gobierno', 'Plan de Gobierno'),
@@ -79,6 +80,7 @@ class Opinion_RelPropuesta(models.Model):
     user = models.ForeignKey(PerfilUsuario, on_delete=models.PROTECT)
     relpropuesta = models.ForeignKey(RelPropuestas, null=True, on_delete=models.SET_NULL)
     tiempo_subida = models.DateTimeField(auto_now_add=True, blank=True)
+    history = HistoricalRecords()
 
     # Necesarios
     justificacion = models.TextField("justificacion", max_length=2000, blank=True)
