@@ -217,7 +217,8 @@ $(document).ready(function() {
             data: { "respuestas_J" : respuestasJ,
             		"intento": intento,
             		"matches": matches,
-            		"importancias_J" : importanciasJ},
+            		"importancias_J" : importanciasJ,
+            		"csrfmiddlewaretoken": window.csrftoken},
             success: function(json) {
                 // $('#post-text').val(''); // remove the value from the input
                 console.log(json); // log the returned json to the console
@@ -230,46 +231,3 @@ $(document).ready(function() {
     };
 	
 });
-
-//Codigo obtenido de https://github.com/realpython/django-form-fun/blob/master/part1/main.js
-
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-var csrftoken = getCookie('csrftoken');
-
-function csrfSafeMethod(method) {
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-
-function sameOrigin(url) {
-    var host = document.location.host;
-    var protocol = document.location.protocol;
-    var sr_origin = '//' + host;
-    var origin = protocol + sr_origin;
-    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-        !(/^(\/\/|http:|https:).*/.test(url));
-}
-
-$.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
-    }
-});  
-
-// Fin del codigo de github
