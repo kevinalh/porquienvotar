@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'codificacion.apps.CodificacionConfig',
     'colorfield',
     'simple_history',
+    'captcha',
     # 'django_pydenticon',
 ]
 
@@ -122,3 +123,10 @@ MEDIA_URL = '/media/'
 # Security - Scoop
 
 DEBUG_PROPAGATE_EXCEPTIONS = False
+
+# ReCaptcha
+
+RECAPTCHA_PUBLIC_KEY = '6LcIVRkTAAAAAHNM1TEMwu1QNwJSZpIE4TOSWl3o'
+RECAPTCHA_PRIVATE_KEY = '6LcIVRkTAAAAACW00u_PphLezFXHOYPia1VACoY0'
+NOCAPTCHA = True
+RECAPTCHA_USE_SSL = True

@@ -6,10 +6,9 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from quiz.models import CategoriaPropuesta, Propuesta, Candidato, RelPropuestas
 
-from .forms import RespuestaForm, TokenForm
+from .forms import RespuestaForm, TokenForm, RegistroForm
 from .models import TokenUsuario, Opinion_RelPropuesta
 from django.shortcuts import redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
@@ -161,7 +160,7 @@ def RedirectCuenta(request):
 
 def Registro(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistroForm(request.POST)
         if form.is_valid():
             new_user = form.save()
             new_user = authenticate(username=form.cleaned_data['username'],
@@ -170,7 +169,7 @@ def Registro(request):
             login(request, new_user)
             return redirect('codificacion:codeindex')
     else:
-        form = UserCreationForm()
+        form = RegistroForm()
     context = {'form': form, }
     return render(request, 'cuentas/register.html', context)
 

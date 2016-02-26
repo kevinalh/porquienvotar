@@ -2,6 +2,9 @@ from django import forms
 
 from .models import Opinion_RelPropuesta, PerfilUsuario, TokenUsuario
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.forms import UserCreationForm
+
+from captcha.fields import ReCaptchaField
 
 
 class RespuestaForm (forms.ModelForm):
@@ -26,3 +29,7 @@ class TokenForm (forms.Form):
                 if PerfilUsuario.objects.filter(token=obj_token).exists():
                     # El token existe pero ya esta siendo usado
                     raise forms.ValidationError(_('El token ya ha sido usado'), code='invalid')
+
+
+class RegistroForm (UserCreationForm):
+    captcha = ReCaptchaField(attrs={'theme': 'clean'})
