@@ -16,6 +16,7 @@
 				</div>
 				{% else %}
 				<div class="list-group">
+					<h3>Aportes</h3>
 					{% for aporte in aportes %}
 					<a href="{% url 'codificacion:candprop' aporte.relpropuesta.propuesta_relpropuestas.id aporte.relpropuesta.candidato_relpropuestas.id %}"
 					class="list-group-item">

@@ -53,10 +53,10 @@
 							    			<a class="btn btn-info pull-right" href="{% url 'codificacion:candprop' propuesta.id candidato.id %}" role="button">Editar</a>
 							    		{% endif %}
 							    	</h4>
-						  			<p>{{ relpropuesta.opinion }} {{ relpropuesta.progreso }}</p>
+						  			<p>{{ relpropuesta.opinion }}</p>
 						  			<div class="progress">
-									  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-									    <span class="sr-only">40% Complete (success)</span>
+									  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ relpropuesta.progresoporciento }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ relpropuesta.progresoporciento }}%">
+									    <span class="sr-only">Completo en un {{ relpropuesta.progresoporciento }}%</span>
 									  </div>
 									</div>
 							  	</div>

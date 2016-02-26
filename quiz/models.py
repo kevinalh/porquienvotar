@@ -8,6 +8,7 @@ from django.db.models.deletion import SET_NULL, CASCADE, SET_DEFAULT
 
 from colorfield.fields import ColorField
 import codificacion
+import math
 
 VOTOS_PERMITIDOS = ((-1, 'En desacuerdo -'),
                     (0, 'Neutral'),
@@ -20,6 +21,8 @@ IMPORTANCIAS_PERMITIDAS = ((0, '0'),
                            (4, '4'),)
 
 SIN_CATEGORIZAR_ID = 99
+
+NUMERO_ACEPTABLE = 3
 
 # Estructural
 
@@ -128,8 +131,12 @@ class RelPropuestas (models.Model):
         num_opiniones = codificacion.models.Opinion_RelPropuesta.objects.filter(relpropuesta=self).count()
         return num_opiniones
 
+    def progresoporciento(self):
+        numero_progreso = self.progreso()
+        return min(math.floor((numero_progreso/float(NUMERO_ACEPTABLE))*100), 100)
+
     def __str__(self):
-        return '%s : %s' % (self.candidato_relpropuestas.nombre_candidato,
+        return '%s : %s' % (self.candidato_relpropuestas.aliascandidato(),
                             self.propuesta_relpropuestas.titulo_propuesta)
         # return self.propuesta.titulo_propuesta
 

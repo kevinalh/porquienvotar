@@ -75,7 +75,7 @@ def CodeIndex(request):
 def ConfigCuenta(request):
     usuario = request.user
     try:
-        aportes = Opinion_RelPropuesta.objects.filter(user=usuario.perfil_usuario).order_by('-tiempo_subida')[:10]
+        aportes = Opinion_RelPropuesta.objects.filter(user=usuario.perfil_usuario).order_by('-tiempo_subida')
     except ObjectDoesNotExist:
         aportes = False
     context = {'usuario': usuario,

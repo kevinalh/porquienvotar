@@ -18,7 +18,9 @@
 	</script>
 	<script src="{% static "quiz/js/preguntas.js" %}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.0.16/bootstrap-slider.min.js"></script>
-
+	<!-- Go to www.addthis.com/dashboard to customize your tools -->
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56cb87554f8c34f8"></script>
+	
 {% endblock scripts %}
 
 {% block estilos %}
@@ -85,7 +87,8 @@
 							  </label>
 							</div>
 						</div>
-						<div class="col-md-4">
+						<div class="hidden-lg hidden-md">&nbsp;</div>
+						<div class="col-md-4 text-center">
 							<label class="text-muted"><h6>¿Cuánta importancia tiene esto para tí?</h6></label>
 							<input id="slider_{{ propuesta.id }}" data-slider-id='slider_{{ propuesta.id }}Slider' type="text" data-slider-min="0" data-slider-max="4" data-slider-step="1" data-slider-value="2"/>
 						</div>
