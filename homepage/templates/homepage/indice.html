@@ -4,6 +4,7 @@
 
 {% block estilos %}
 <link rel="stylesheet" href="{% static "homepage/css/full.css" %}">	
+<link rel="stylesheet" href="{% static "homepage/css/indice.css" %}">	
 {% endblock estilos %}
 
 {% block htmlstuff %}
@@ -27,14 +28,14 @@
 			</noscript>
 			{% block content %}
 
-                <article class="landing_inicio">
-                    <header>
-                        <h1 class="PQVheader blanco"><strong>¿Por quién votar?</strong></h1>
-                        <h3 class="blanco">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</h3>
-                    </header>
-                    <hr>
-                    <a href="{% url 'quiz:quizindex' %}"><button class="btn btn-success btn-lg">Empezar el cuestionario</button></a>
-                </article>
+			    <header id="top" class="header landing_inicio">
+			        <div class="textovertical_centrado">
+			            <h1 class="PQVheader blanco">&#191;Por Qui&#233;n Votar?</h1>
+			            <h3 class="blanco">Aplicaci&#243;n de ayuda al sufragio - Per&#250;</h3>
+			            <br>
+                    	<a href="{% url 'quiz:quizindex' %}" class="btn btn-success btn-lg">Empezar el cuestionario</a>
+			        </div>
+			    </header>
 
                 <aside>
                     <h3></h3>
@@ -45,11 +46,14 @@
 		</div>
 		
 	<div class="container">
-	    <footer class="footer">
+	    <footer class="footer bottom blanco">
 	    	<div class="container">
-	    		<p class="text-muted">
-	    			<i class="fa fa-copyright" aria-hidden="true"></i>&nbsp;2016 -
+	    		<p>
+	    			PQV 2016 -
 	    		</p>
+	    		<p>Fuente de imagen: Martin St-Amant - Wikipedia - CC-BY-SA-3.0,  
+	    		<a href="https://commons.wikimedia.org/wiki/File:99_-_Machu_Picchu_-_Juin_2009.edit3.jpg" class="text-primary">Link</a>
+				</p>
 	    	</div>
 	    </footer>
     </div> <!-- /container -->

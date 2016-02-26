@@ -33,3 +33,12 @@
     height: 10em;
     overflow: auto;
 }
+
+body {
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+}
