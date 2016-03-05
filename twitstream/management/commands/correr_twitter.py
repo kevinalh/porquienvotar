@@ -50,7 +50,7 @@ class Command(BaseCommand):
 
             def on_status(self, status):
 
-                print(str(status.text).encode("utf-8"))
+                # print(str(status.text).encode("utf-8"))
                 puntos = 0
                 for keyword in keywords:
                     if keyword.key.lower() in status.text.lower():
