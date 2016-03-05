@@ -5,9 +5,9 @@ import tweepy
 import json
 from shapely.geometry import Point, Polygon
 import logging
+from unidecode import unidecode
 
 from twitstream.models import Keyword, Tweet
-
 from django.conf import settings
 
 # Constantes
@@ -22,10 +22,11 @@ class Command(BaseCommand):
 
         class CandidatosStreamListener(tweepy.StreamListener):
 
-            def guardar_db(self, status, puntos_tweet):
+            def guardar_db(self, status, puntos_tweet, de_peru_bool):
                 tweet, _ = Tweet.objects.get_or_create(text=status.text, id_str=status.id_str,
                                                        user_id_str=status.user.id_str,
-                                                       puntos=puntos_tweet)
+                                                       puntos=puntos_tweet,
+                                                       de_peru=de_peru_bool)
                 tweet.save()
 
             def verificar_coordenadas(self, status):
@@ -52,13 +53,15 @@ class Command(BaseCommand):
 
                 # print(str(status.text).encode("utf-8"))
                 puntos = 0
+                de_peru = False
                 for keyword in keywords:
-                    if keyword.key.lower() in status.text.lower():
+                    if unidecode(keyword.key.lower()) in status.text.lower():
                         puntos += keyword.puntos
                 if self.verificar_coordenadas(status) or self.lugar(status):
                     puntos += EXTRA_PUNTOS
+                    de_peru = True
                 if puntos >= MIN_PUNTOS:
-                    self.guardar_db(status, puntos)
+                    self.guardar_db(status, puntos, de_peru)
 
             def on_error(self, status):
                 logger = logging.getLogger(__name__)
