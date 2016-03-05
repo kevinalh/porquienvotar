@@ -1,0 +1,44 @@
+{% extends 'homepage/base.html' %}
+
+{% load staticfiles %}
+
+{% block scripts %}
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="https://www.google.com/jsapi"></script>
+	<script>
+		var relpropuestas = $.parseJSON('{{ relpropuestas|escapejs }}');
+		var candidatos = {};
+		{% for candidato in lista_candidatos %}
+			candidatos[{{ candidato.id|escapejs }}] = {'partido': '{{ candidato.partido_candidato.nombre_partido|escapejs }}',
+			'color': '{{ candidato.partido_candidato.color_partido|escapejs }}',
+			'alias': '{{ candidato.alias_candidato|escapejs }}',
+			'id' : {{ candidato.id|escapejs }}, }
+		{% endfor %}
+		window.csrftoken="{{ csrf_token|escapejs }}";
+	</script>
+	<script src="{% static "quiz/js/preguntas.js" %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.0.16/bootstrap-slider.min.js"></script>
+	<!-- Go to www.addthis.com/dashboard to customize your tools -->
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56cb87554f8c34f8"></script>
+	
+{% endblock scripts %}
+
+{% block estilos %}
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/6.0.16/css/bootstrap-slider.min.css">
+{% endblock estilos %}
+
+{% block navegacion %}
+	<li><a href="{% url 'indice' %}">Inicio</a></li>
+	<li><a href="{% url 'quiz:quizindex' %}">Preguntas</a></li>
+	<li><a href="{% url 'codificacion:codeindex' %}">Codificar</a></li>
+	<li class="active"><a href="{% url 'twitstream:twit' %}">Popularidad en Twitter</a></li>
+	<li><a href="{% url 'acercade' %}">Acerca de</a></li>
+{% endblock navegacion %}
+
+{% block content %}
+<article>
+
+
+
+</article>
+{% endblock content %}

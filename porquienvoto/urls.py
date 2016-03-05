@@ -34,7 +34,8 @@ urlpatterns = [
         {'template_name': 'cuentas/logoutpage.html'}, name='logout'),
     url(r'^cuenta/', ConfigCuenta, name='cuenta'),
     url(r'^accounts/profile/', RedirectCuenta),
-    url(r'^acercade/', homviews.acerca_de, name='acercade')
+    url(r'^acercade/', homviews.acerca_de, name='acercade'),
+    url(r'^twitter/', include('twitstream.urls', namespace="twitstream")),
     # FALTA:
     # url(r'^password_change/$', auth_views.password_change, name='password_change'),
     # url(r'^password_change/done/$', auth_views.password_change_done, name='password_change_done'),

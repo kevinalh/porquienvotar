@@ -15,6 +15,14 @@ def get_env_variable(var_name):
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = get_env_variable("MY_KEY")
 
+# TWITTER
+
+TWITTER_CONSUMER_KEY = get_env_variable('MY_TWITTER_CONSUMER_KEY')
+TWITTER_CONSUMER_SECRET = get_env_variable('MY_TWITTER_CONSUMER_SECRET')
+
+ACCESS_TOKEN = get_env_variable('MY_ACCESS_TOKEN')
+ACCESS_TOKEN_SECRET = get_env_variable('MY_ACCESS_TOKEN_SECRET')
+
 ROOT_URLCONF = "porquienvoto.urls"
 
 WSGI_APPLICATION = '/var/www/kevinalh_pythonanywhere_com_wsgi.py'

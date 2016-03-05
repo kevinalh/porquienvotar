@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'colorfield',
     'simple_history',
     'captcha',
+    'twitstream',
     # 'django_pydenticon',
 ]
 
