@@ -32,7 +32,8 @@ class Tweet(models.Model):
     de_peru = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.id_str
+        return "%s - %s" % (self.text,
+                            self.tiempo)
 
 
 class Keyword(models.Model):
@@ -44,7 +45,9 @@ class Keyword(models.Model):
     twitter_del_candidato = models.BooleanField(default=False)
 
     def __str__(self):
-        if self.hashtag:
+        if self.twitter_del_candidato:
+            return '@' + self.key
+        elif self.hashtag:
             return '#' + self.key
         else:
             return self.key

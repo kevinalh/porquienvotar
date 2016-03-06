@@ -2,6 +2,7 @@
 from django.core.management.base import BaseCommand
 
 import tweepy
+import time
 import json
 from shapely.geometry import Point, Polygon
 import logging
@@ -9,6 +10,7 @@ from unidecode import unidecode
 
 from twitstream.models import Keyword, Tweet
 from django.conf import settings
+from django.db import OperationalError
 
 # Constantes
 MIN_PUNTOS = 5
@@ -65,7 +67,18 @@ class Command(BaseCommand):
 
             def on_error(self, status):
                 logger = logging.getLogger(__name__)
-                logger.critical(status)
+                error_twitter = "Twitter on_error codigo = {code}".format(code=status)
+                logger.critical(error_twitter)
+                print(error_twitter)
+                time.sleep(5)
+                if status == 420:
+                    # returning False in on_data disconnects the stream
+                    return False
+                else:
+                    return True
+
+            def on_timeout(self):
+                print("Twitter on_timeout")
 
         PERU = json.load(open('twitstream/peru.json', 'r'))
         peru_polygon = Polygon(PERU)
@@ -83,4 +96,13 @@ class Command(BaseCommand):
         myStream = tweepy.Stream(auth=api.auth, listener=myStreamCandidatos)
 
         # Activando stream
-        myStream.filter(track=track_list, languages=['es'])
+        def correr_stream():
+            try:
+                myStream.filter(track=track_list, languages=['es'])
+            except OperationalError:
+                return correr_stream
+
+        try:
+            correr_stream()
+        except KeyboardInterrupt:
+            print("Cancelado por teclado")
