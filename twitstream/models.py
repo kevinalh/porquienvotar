@@ -30,7 +30,7 @@ class Tweet(models.Model):
     tiempo = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(null=True)
     candidatos = models.ManyToManyField(Candidato, blank=True)
-    pais = models.CharField(max_length=3)
+    pais = models.CharField(max_length=3, null=True)
 
     def __str__(self):
         return "%s - %s" % (self.text,
