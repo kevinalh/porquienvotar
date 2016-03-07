@@ -3,6 +3,7 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 from django.db import OperationalError
 from django.utils.timezone import make_aware, utc
+from django.db import connection
 
 import tweepy
 import time
@@ -108,7 +109,9 @@ class Command(BaseCommand):
                 myStream.filter(track=track_list, languages=['es'])
             except OperationalError:
                 print("Operational Error!")
-                time.sleep(20)
+                connection.connection.close()
+                connection.connection = None
+                time.sleep(6)
                 return correr_stream()
 
         try:
