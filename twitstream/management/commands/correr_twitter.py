@@ -114,7 +114,8 @@ class Command(BaseCommand):
                 time.sleep(6)
                 return correr_stream()
 
-        try:
-            correr_stream()
-        except KeyboardInterrupt:
-            print("Cancelado por teclado")
+        if __name__ == 'twitstream.management.commands.correr_twitter':
+            try:
+                correr_stream()
+            except KeyboardInterrupt:
+                print("Cancelado por teclado")
