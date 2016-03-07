@@ -1,7 +1,7 @@
 import logging
 import socket
 import sys
-from twitstream import scheduled
+from .streaming_candidatos import correr_stream
 
 lock_socket = None
 
@@ -22,4 +22,4 @@ def is_lock_free():
 if not is_lock_free():
     sys.exit()
 
-scheduled.streaming_candidatos()
+correr_stream()
