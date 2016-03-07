@@ -24,11 +24,11 @@ class Command(BaseCommand):
 
         class CandidatosStreamListener(tweepy.StreamListener):
 
-            def guardar_db(self, status, puntos_tweet, de_peru_bool):
+            def guardar_db(self, status, puntos_tweet, pais_alg):
                 tweet, _ = Tweet.objects.get_or_create(text=status.text, id_str=status.id_str,
                                                        user_id_str=status.user.id_str,
                                                        puntos=puntos_tweet,
-                                                       de_peru=de_peru_bool)
+                                                       pais=pais_alg)
                 tweet.save()
 
             def verificar_coordenadas(self, status):
@@ -39,7 +39,7 @@ class Command(BaseCommand):
                 else:
                     punto = Point(coordenadas[0], coordenadas[1])
                     if peru_polygon.contains(punto):
-                        return True
+                        return "PE"
                     else:
                         return False
 
@@ -49,21 +49,22 @@ class Command(BaseCommand):
                 except AttributeError:
                     return False
                 else:
-                    return True if pais == 'PE' else False
+                    return pais
 
             def on_status(self, status):
 
                 # print(str(status.text).encode("utf-8"))
                 puntos = 0
-                de_peru = False
                 for keyword in keywords:
-                    if unidecode(keyword.key.lower()) in status.text.lower():
+                    if unidecode(keyword.key.lower()) in unidecode(status.text.lower()):
                         puntos += keyword.puntos
-                if self.verificar_coordenadas(status) or self.lugar(status):
+                pais = self.lugar(status) or self.verificar_coordenadas(status)
+                if pais is False:
+                    pais = "XX"
+                else:
                     puntos += EXTRA_PUNTOS
-                    de_peru = True
                 if puntos >= MIN_PUNTOS:
-                    self.guardar_db(status, puntos, de_peru)
+                    self.guardar_db(status, puntos, pais)
 
             def on_error(self, status):
                 logger = logging.getLogger(__name__)
@@ -101,7 +102,8 @@ class Command(BaseCommand):
                 myStream.filter(track=track_list, languages=['es'])
             except OperationalError:
                 print("Operational Error!")
-                return correr_stream
+                time.sleep(6)
+                return correr_stream()
 
         try:
             correr_stream()
