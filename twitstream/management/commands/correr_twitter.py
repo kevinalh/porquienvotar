@@ -100,6 +100,7 @@ class Command(BaseCommand):
             try:
                 myStream.filter(track=track_list, languages=['es'])
             except OperationalError:
+                print("Operational Error!")
                 return correr_stream
 
         try:

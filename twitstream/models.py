@@ -29,7 +29,7 @@ class Tweet(models.Model):
     puntos = models.PositiveSmallIntegerField(default=0)
     tiempo = models.DateTimeField(auto_now_add=True)
     candidatos = models.ManyToManyField(Candidato, blank=True)
-    de_peru = models.BooleanField(default=False)
+    pais = models.CharField(max_length=3)
 
     def __str__(self):
         return "%s - %s" % (self.text,
