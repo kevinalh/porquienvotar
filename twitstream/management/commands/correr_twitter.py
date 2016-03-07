@@ -35,8 +35,8 @@ class Command(BaseCommand):
 
             def verificar_coordenadas(self, status):
                 try:
-                    coordenadas = status.coordinates.coordinates
-                except AttributeError:
+                    coordenadas = status.coordinates['coordinates']
+                except TypeError:
                     return False
                 else:
                     punto = Point(coordenadas[0], coordenadas[1])
@@ -62,7 +62,7 @@ class Command(BaseCommand):
                         puntos += keyword.puntos
                 pais = self.lugar(status) or self.verificar_coordenadas(status)
                 if pais is False:
-                    pais = "XX"
+                    pais = None
                 else:
                     puntos += EXTRA_PUNTOS
                 try:
