@@ -1,7 +1,7 @@
 import logging
 import socket
 import sys
-from twitstream.management.commands import correr_twitter
+from twitstream import scheduled
 
 lock_socket = None
 
@@ -22,4 +22,4 @@ def is_lock_free():
 if not is_lock_free():
     sys.exit()
 
-correr_twitter.Command.handle().correr_stream()
+scheduled.streaming_candidatos()
