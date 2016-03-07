@@ -77,7 +77,7 @@ class Command(BaseCommand):
                 error_twitter = "Twitter on_error codigo = {code}".format(code=status)
                 logger.critical(error_twitter)
                 print(error_twitter)
-                time.sleep(5)
+                time.sleep(20)
                 if status == 420:
                     # returning False in on_data disconnects the stream
                     return False
@@ -108,7 +108,7 @@ class Command(BaseCommand):
                 myStream.filter(track=track_list, languages=['es'])
             except OperationalError:
                 print("Operational Error!")
-                time.sleep(6)
+                time.sleep(20)
                 return correr_stream()
 
         try:

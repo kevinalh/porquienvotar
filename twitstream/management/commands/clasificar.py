@@ -4,6 +4,7 @@ from twitstream.models import Tweet, Keyword
 from quiz.models import Candidato
 
 from tqdm import tqdm
+from unidecode import unidecode
 
 
 class Command(BaseCommand):
@@ -16,7 +17,7 @@ class Command(BaseCommand):
             for candidato in candidatos:
                 keywords_candidato = Keyword.objects.filter(candidato=candidato)
                 for keyword in keywords_candidato:
-                    if keyword.key in tweet_object.text:
+                    if unidecode(keyword.key) in unidecode(tweet_object.text):
                         tweet_object.candidatos.add(candidato)
                         continue
             tweet_object.analizado = True

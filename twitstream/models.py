@@ -39,7 +39,7 @@ class Tweet(models.Model):
 
 
 class Keyword(models.Model):
-    key = models.CharField(max_length=22, unique=True)
+    key = models.CharField(max_length=22)
     candidato = models.ForeignKey(Candidato, on_delete=models.CASCADE, blank=True, null=True)
     puntos = models.PositiveSmallIntegerField(default=1)
     para_filtro = models.BooleanField(default=True)
