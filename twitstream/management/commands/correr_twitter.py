@@ -11,6 +11,7 @@ from unidecode import unidecode
 from twitstream.models import Keyword, Tweet
 from django.conf import settings
 from django.db import OperationalError
+from django.utils.timezone import make_aware, utc
 
 # Constantes
 MIN_PUNTOS = 5
@@ -24,10 +25,11 @@ class Command(BaseCommand):
 
         class CandidatosStreamListener(tweepy.StreamListener):
 
-            def guardar_db(self, status, puntos_tweet, pais_alg):
+            def guardar_db(self, status, puntos_tweet, pais_alg, tiempo_creacion):
                 tweet, _ = Tweet.objects.get_or_create(text=status.text, id_str=status.id_str,
                                                        user_id_str=status.user.id_str,
                                                        puntos=puntos_tweet,
+                                                       created_at=tiempo_creacion,
                                                        pais=pais_alg)
                 tweet.save()
 
@@ -63,8 +65,12 @@ class Command(BaseCommand):
                     pais = "XX"
                 else:
                     puntos += EXTRA_PUNTOS
+                try:
+                    ts = make_aware(status.created_at, utc)
+                except:
+                    ts = None
                 if puntos >= MIN_PUNTOS:
-                    self.guardar_db(status, puntos, pais)
+                    self.guardar_db(status, puntos, pais, ts)
 
             def on_error(self, status):
                 logger = logging.getLogger(__name__)

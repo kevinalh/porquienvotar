@@ -28,6 +28,7 @@ class Tweet(models.Model):
     user_id_str = models.CharField(max_length=21, blank=True, null=True)
     puntos = models.PositiveSmallIntegerField(default=0)
     tiempo = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(null=True)
     candidatos = models.ManyToManyField(Candidato, blank=True)
     pais = models.CharField(max_length=3)
 
