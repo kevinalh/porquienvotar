@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.core.management.base import BaseCommand
+from django.conf import settings
+from django.db import OperationalError
+from django.utils.timezone import make_aware, utc
 
 import tweepy
 import time
@@ -9,9 +12,6 @@ import logging
 from unidecode import unidecode
 
 from twitstream.models import Keyword, Tweet
-from django.conf import settings
-from django.db import OperationalError
-from django.utils.timezone import make_aware, utc
 
 # Constantes
 MIN_PUNTOS = 5
@@ -19,7 +19,7 @@ EXTRA_PUNTOS = 2
 
 
 class Command(BaseCommand):
-    help = "Runs the streaming_candidatos script"
+    help = "Corre el streaming sobre los keywords en la base de datos y guarda los que pasen el test"
 
     def handle(self, *args, **options):
 
