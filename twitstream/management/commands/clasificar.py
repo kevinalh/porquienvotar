@@ -14,11 +14,11 @@ class Command(BaseCommand):
 
         def clasificar_tweet(tweet_object):
             candidatos = Candidato.objects.filter(entra_candidato=True)
-            for candidato in candidatos:
-                keywords_candidato = Keyword.objects.filter(candidato=candidato)
+            for x in candidatos:
+                keywords_candidato = Keyword.objects.filter(candidato=x.id)
                 for keyword in keywords_candidato:
-                    if unidecode(keyword.key) in unidecode(tweet_object.text):
-                        tweet_object.candidatos.add(candidato)
+                    if unidecode(keyword.key.lower()) in unidecode(tweet_object.text.lower()):
+                        tweet_object.candidatos.add(x.id)
                         continue
             tweet_object.analizado = True
             tweet_object.save()
