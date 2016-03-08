@@ -118,8 +118,10 @@ class Command(BaseCommand):
                 return False
 
         if not is_lock_free():
+            print("Lock not free")
             sys.exit()
         else:
+            print("Empezando...")
             PERU = json.load(open('twitstream/peru.json', 'r'))
             peru_polygon = Polygon(PERU)
             keywords = Keyword.objects.all()

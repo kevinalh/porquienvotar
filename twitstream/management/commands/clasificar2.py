@@ -42,8 +42,10 @@ class Command(BaseCommand):
                 return False
 
         if not is_lock_free():
+            print("Lock not free")
             sys.exit()
         else:
+            print("Empezando...")
             tweets = Tweet.objects.filter(analizado=False)
             print(str(len(tweets)))
             for tweet in tweets:
