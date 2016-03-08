@@ -14,29 +14,10 @@ from unidecode import unidecode
 
 from twitstream.models import Keyword, Tweet
 
-import logging
 import socket
 import sys
 
 lock_socket = None
-
-def is_lock_free():
-    global lock_socket
-    lock_socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
-    try:
-        lock_id = "my-username.my-task-name"   # this should be unique. using your username as a prefix is a convention
-        lock_socket.bind('\0' + lock_id)
-        logging.debug("Acquired lock %r" % (lock_id,))
-        return True
-    except socket.error:
-        # socket already locked, task must already be running
-        logging.info("Failed to acquire lock %r" % (lock_id,))
-        return False
-
-if not is_lock_free():
-    sys.exit()
-
-correr_stream()
 
 # Constantes
 MIN_PUNTOS = 5
@@ -137,3 +118,21 @@ class Command(BaseCommand):
                 connection.connection = None
                 time.sleep(6)
                 return correr_stream()
+
+        def is_lock_free():
+            global lock_socket
+            lock_socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+            try:
+                lock_id = "kevinalh.correr_twitter2"   # this should be unique. using your username as a prefix is a convention
+                lock_socket.bind('\0' + lock_id)
+                logging.debug("Acquired lock %r" % (lock_id,))
+                return True
+            except socket.error:
+                # socket already locked, task must already be running
+                logging.info("Failed to acquire lock %r" % (lock_id,))
+                return False
+
+        if not is_lock_free():
+            sys.exit()
+        else:
+            correr_stream()
