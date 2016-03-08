@@ -93,21 +93,6 @@ class Command(BaseCommand):
             def on_timeout(self):
                 print("Twitter on_timeout")
 
-        PERU = json.load(open('twitstream/peru.json', 'r'))
-        peru_polygon = Polygon(PERU)
-        keywords = Keyword.objects.all()
-        keywords_filtro = keywords.filter(para_filtro=True)
-        track_list = [keyword.key for keyword in keywords_filtro]
-
-        # Autorizacion y llamando a stream
-        auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
-        api = tweepy.API(auth)
-
-        # Filtros
-        auth.set_access_token(settings.ACCESS_TOKEN, settings.ACCESS_TOKEN_SECRET)
-        myStreamCandidatos = CandidatosStreamListener()
-        myStream = tweepy.Stream(auth=api.auth, listener=myStreamCandidatos)
-
         # Activando stream
         def correr_stream():
             try:
@@ -123,7 +108,7 @@ class Command(BaseCommand):
             global lock_socket
             lock_socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
             try:
-                lock_id = "kevinalh.correr_twitter2"   # this should be unique. using your username as a prefix is a convention
+                lock_id = "kevinalh.correr_twitter2"   # this should be unique
                 lock_socket.bind('\0' + lock_id)
                 logging.debug("Acquired lock %r" % (lock_id,))
                 return True
@@ -135,4 +120,20 @@ class Command(BaseCommand):
         if not is_lock_free():
             sys.exit()
         else:
+            PERU = json.load(open('twitstream/peru.json', 'r'))
+            peru_polygon = Polygon(PERU)
+            keywords = Keyword.objects.all()
+            keywords_filtro = keywords.filter(para_filtro=True)
+            track_list = [keyword.key for keyword in keywords_filtro]
+
+            # Autorizacion y llamando a stream
+            auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
+            api = tweepy.API(auth)
+
+            # Filtros
+            auth.set_access_token(settings.ACCESS_TOKEN, settings.ACCESS_TOKEN_SECRET)
+            myStreamCandidatos = CandidatosStreamListener()
+            myStream = tweepy.Stream(auth=api.auth, listener=myStreamCandidatos)
+
+            # Funcion
             correr_stream()
