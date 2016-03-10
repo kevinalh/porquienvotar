@@ -45,7 +45,7 @@ $(document).ready(function(){
 			          },
 			          minorGridlines: {
 			            units: {
-			              hours: {format: ['hh:mm:ss a', 'ha']},
+			              hours: {format: ['hh:mm a', 'ha']},
 			              minutes: {format: ['HH:mm a Z', ':mm']}
 			            }
 			          },

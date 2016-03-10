@@ -20,7 +20,8 @@ from django.contrib.auth import views as auth_views
 from codificacion.views import ConfigCuenta, RedirectCuenta, Registro
 
 urlpatterns = [
-    url(r'^preguntastriviales123/', include(admin.site.urls)),
+    url(r'^estaticos/mathandchemmajors123/', include(admin.site.urls)),
+    url(r'^robots\.txt', include('robots.urls')),
     url(r'^quiz/', include('quiz.urls', namespace="quiz")),
     url(r'^codificacion/', include('codificacion.urls', namespace="codificacion")),
     url(r'^$', homviews.index_view, name="indice"),

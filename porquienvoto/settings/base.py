@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'quiz.apps.QuizConfig',
     'homepage.apps.HomepageConfig',
     'codificacion.apps.CodificacionConfig',
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     'simple_history',
     'captcha',
     'twitstream',
+    'robots'
     # 'django_pydenticon',
 ]
 
@@ -131,3 +133,5 @@ RECAPTCHA_PUBLIC_KEY = '6LcIVRkTAAAAAHNM1TEMwu1QNwJSZpIE4TOSWl3o'
 RECAPTCHA_PRIVATE_KEY = '6LcIVRkTAAAAACW00u_PphLezFXHOYPia1VACoY0'
 NOCAPTCHA = True
 RECAPTCHA_USE_SSL = True
+
+SITE_ID = 1
