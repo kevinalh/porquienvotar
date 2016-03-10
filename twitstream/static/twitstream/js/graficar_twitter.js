@@ -32,8 +32,8 @@ $(document).ready(function(){
         var options = {
 			title: 'Popularidad en Twitter',
 			legend: { position: 'bottom' },
-			'width': 1300,
-			'height': 1000,
+			height: '100%',
+			width: '100%',
 			hAxis: {
 			    format: 'M/d/yy HH:mm',
 		          gridlines: {

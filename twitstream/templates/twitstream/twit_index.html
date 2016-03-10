@@ -23,10 +23,32 @@
 	<li><a href="{% url 'acercade' %}">Acerca de</a></li>
 {% endblock navegacion %}
 
+<div class="container-fluid">
+	<noscript>
+		<div id="barra_error" class="alert alert-danger">
+			<span id="barra_error_texto">
+				<p>Para utilizar las funcionalidades completas de este sitio es necesario tener JavaScript habilitado.
+				Aqu&#237; est&#225;n las <a href="http://www.enable-javascript.com/es/" target="_blank">
+				instrucciones para habilitar JavaScript en tu navegador web</a>.</p>
+			</span>
+		</div>
+	</noscript>
+</div>
+
+{% block container_estandar %}
 {% block content %}
-<section>
-	<div class="row">
-		<div id="timeline_twitter" style="width: 1300px; height: 1000px"></div>
-	</div>
-</section>
+<div class="container-fluid">
+	<div id="timeline_twitter" style="width: 100%; height: 800px"></div>
+</div>
 {% endblock content %}
+    	
+<footer class="footer">
+	<div class="container">
+		<p class="text-muted">
+			PQV 2016 -
+	    </p>
+	</div>
+</footer>
+{% endblock container_estandar %}
+
+
