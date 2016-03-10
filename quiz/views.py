@@ -7,7 +7,7 @@ import logging
 from django.http.response import Http404, HttpResponse
 from django.db.models import Max
 
-from ipware.ip import get_real_ip, get_ip
+from ipware.ip import get_real_ip
 # import pdb
 from django.core.exceptions import ValidationError, MultipleObjectsReturned
 from django.views.decorators.csrf import ensure_csrf_cookie

@@ -20,3 +20,4 @@ scripts_auxiliares/*
 dumpdata/
 pdf.js/
 ssl/
+manage.py

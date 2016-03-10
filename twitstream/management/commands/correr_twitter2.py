@@ -101,7 +101,7 @@ class Command(BaseCommand):
                 print("Operational Error!")
                 connection.connection.close()
                 connection.connection = None
-                time.sleep(6)
+                time.sleep(60)
                 return correr_stream()
 
         def is_lock_free():
