@@ -2,11 +2,14 @@
 
 {% block navegacion %}
 	<li><a href="{% url 'indice' %}">Inicio</a></li>
-	<li><a href="{% url 'quiz:quizindex' %}">Preguntas</a></li>
-	<li><a href="{% url 'codificacion:codeindex' %}">Codificar</a></li>
-	<li class="active"><a href="{% url 'acercade' %}">Acerca de</a></li>
+    <li class="disabled"><a>Preguntas</a></li>
+    <li class="disabled"><a>Codificar</a></li>
+    <li><a href="{% url 'twitstream:twit' %}">Popularidad en Twitter</a></li>
+    <li class="active"><a href="{% url 'acercade' %}">Acerca de</a></li>
 {% endblock navegacion %}
 
-	<div class="alert alert-info">
-		<p>En construcci&#243;n.<p>
+{% block content %}
+	<div class="col-md-12">
+		
 	</div>
+{% endblock content %}

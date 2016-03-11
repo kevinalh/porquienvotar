@@ -36,7 +36,10 @@ def twitter_candidatos(request):
     candidatos = json.dumps(list(dic_candidatos.keys()), ensure_ascii=False)
     tiempos = json.dumps([tiempo.astimezone(pytz.timezone('America/Lima')).strftime("%Y,%m,%d,%H")
                           for tiempo in lista_tiempos])
+    colores = json.dumps({candidato.alias_candidato: candidato.partido_candidato.color_partido
+                          for candidato in lista_candidatos})
     context = {'datatwitter': dic_json,
                'candidatos': candidatos,
-               'tiempos': tiempos}
+               'tiempos': tiempos,
+               'colores': colores, }
     return render(request, 'twitstream/twit_index.html', context)

@@ -29,12 +29,29 @@
 			{% block content %}
 
 			    <header id="top" class="header landing_inicio">
-			        <div class="textovertical_centrado">
-			            <h1 class="PQVheader blanco">&#191;Por Qui&#233;n Votar?</h1>
-			            <h3 class="blanco">Aplicaci&#243;n de ayuda al sufragio - Per&#250;</h3>
+			    	<div class="row">
+			    		<h1 class="PQVheader blanco">Popularidad de los candidatos en Twitter</h1>
+			            <h3 class="blanco">Se acercan las elecciones en el Per&#250;, y con ello, mucha discusi&#243;n en las redes sociales.</h3>
+			            <h3 class="blanco">&#191;No ser&#237;a interesante saber cu&#225;nta discusi&#243;n est&#225; generando cada candidato?</h3>
 			            <br>
-                    	<a href="{% url 'quiz:quizindex' %}" class="btn btn-success btn-lg">Empezar el cuestionario</a>
+			            <div class="row">
+                    		<div class="col-md-6">
+                    			<a href="{% url 'twitstream:twit' %}" class="btn btn-success btn-lg">Observa el gr&#225;fico</a>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<a href="{% url 'acercade' %}" class="btn btn-info btn-lg">&#191;C&#243;mo funciona?</a>
+                    		</div>
+                    	</div>
+			    	</div>
+			    	<br><br><br>
+			    	<!--
+			        <div class="row">
+			            <h3 class="PQVheader blanco">&#191;Por Qui&#233;n Votar?</h1>
+			            <p class="blanco">Aplicaci&#243;n de ayuda al sufragio - Per&#250;</p>
+			            <br>
+                    	<a class="disabled btn btn-info">En desarrollo</a>
 			        </div>
+			        <!-->
 			    </header>
 
                 <aside>

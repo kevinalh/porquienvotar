@@ -57,8 +57,8 @@
 					<ul class="nav navbar-nav">
 			        	{% block navegacion %}
 				            <li class="active"><a href="{% url 'indice' %}">Inicio</a></li>
-				            <li><a href="{% url 'quiz:quizindex' %}">Preguntas</a></li>
-				            <li><a href="{% url 'codificacion:codeindex' %}">Codificar</a></li>
+				            <li class="disabled"><a>Preguntas</a></li>
+				            <li class="disabled"><a>Codificar</a></li>
 				            <li><a href="{% url 'twitstream:twit' %}">Popularidad en Twitter</a></li>
 				            <li><a href="{% url 'acercade' %}">Acerca de</a></li>
 			          	{% endblock navegacion %}
@@ -80,7 +80,7 @@
 			            	</ul>
 			            </li>
 	          			{% else %}
-						<li id="loginID"><a href="{% url 'login' %}">Entrar</a></li>
+						<li id="loginID" class="disabled"><a>Entrar</a></li>
 			          	{% endif %}
 					</ul>
 				</div>
