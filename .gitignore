@@ -21,4 +21,4 @@ dumpdata/
 pdf.js/
 ssl/
 manage.py
-backup.json
+*/fixtures/*
